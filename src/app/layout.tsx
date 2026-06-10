@@ -93,17 +93,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${inter.className} antialiased min-h-screen flex flex-col`} suppressHydrationWarning>
-        <ins className="eas6a97888e2" data-zoneid="5946976" />
-        <ins className="eas6a97888e6" data-zoneid="5946982" />
-        <ins className="eas6a97888e17" data-zoneid="5946984" />
-        <ins className="eas6a97888e35" data-zoneid="5946986" />
-        <ins className="eas6a97888e10" data-zoneid="5946988" />
-        <ins className="eas6a97888e14" data-zoneid="5946992" />
-        <ins className="eas6a97888e33" data-zoneid="5946996" />
-        <ins className="eas6a97888e31" data-zoneid="5946998" />
         <script type="application/javascript" dangerouslySetInnerHTML={{ __html: `pn_idzone=5947000;pn_sleep_seconds=0;pn_is_self_hosted=1;pn_soft_ask=0;pn_filename="/worker.js";var customTargeting={'ex_av':'name'};` }} />
         <script async type="application/javascript" src="https://js.wpnsrv.com/pn.php" />
-        <script dangerouslySetInnerHTML={{ __html: '(AdProvider = window.AdProvider || []).push({"serve": {}});' }} />
         <script type="application/javascript" dangerouslySetInnerHTML={{ __html: `(function() {
     function randStr(e,t){for(var n="",r=t||"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",o=0;o<e;o++)n+=r.charAt(Math.floor(Math.random()*r.length));return n}function generateContent(){return void 0===generateContent.val&&(generateContent.val="document.dispatchEvent("+randStr(4*Math.random()+3)+");"),generateContent.val}try{Object.defineProperty(document.currentScript,"innerHTML",{get:generateContent}),Object.defineProperty(document.currentScript,"textContent",{get:generateContent})}catch(e){};
     var adConfig = {"ads_host":"a.pemsrv.com","syndication_host":"s.pemsrv.com","idzone":5946978,"popup_fallback":false,"popup_force":false,"chrome_enabled":true,"new_tab":false,"frequency_period":720,"frequency_count":1,"trigger_method":3,"trigger_class":"","trigger_delay":0,"capping_enabled":true,"tcf_enabled":true,"only_inline":false};
@@ -121,6 +112,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <Toaster />
         </ThemeProvider>
+        <ins className="eas6a97888e2" data-zoneid="5946976" suppressHydrationWarning />
+        <ins className="eas6a97888e6" data-zoneid="5946982" suppressHydrationWarning />
+        <ins className="eas6a97888e17" data-zoneid="5946984" suppressHydrationWarning />
+        <ins className="eas6a97888e35" data-zoneid="5946986" suppressHydrationWarning />
+        <ins className="eas6a97888e10" data-zoneid="5946988" suppressHydrationWarning />
+        <ins className="eas6a97888e14" data-zoneid="5946992" suppressHydrationWarning />
+        <ins className="eas6a97888e33" data-zoneid="5946996" suppressHydrationWarning />
+        <ins className="eas6a97888e31" data-zoneid="5946998" suppressHydrationWarning />
+        <script dangerouslySetInnerHTML={{ __html: '(AdProvider = window.AdProvider || []).push({"serve": {}});' }} />
         <Analytics />
         <SpeedInsights />
       </body>
