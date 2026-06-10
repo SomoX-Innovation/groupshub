@@ -16,6 +16,12 @@ const platformAccent: Record<string, string> = {
   discord: 'from-[#5865F2]/20 to-transparent',
 }
 
+const platformColor: Record<string, string> = {
+  whatsapp: '#25D366',
+  telegram: '#2AABEE',
+  discord: '#5865F2',
+}
+
 interface GroupCardProps {
   group: GroupWithCategory
   variant?: 'default' | 'compact'
@@ -24,6 +30,12 @@ interface GroupCardProps {
 export function GroupCard({ group, variant = 'default' }: GroupCardProps) {
   const glow = platformGlow[group.platform] ?? ''
   const accent = platformAccent[group.platform] ?? ''
+  const color = platformColor[group.platform] ?? '#6366f1'
+  const initials = group.name
+    .split(' ')
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? '')
+    .join('')
 
   return (
     <Link href={`/groups/${group.slug}`} className="block h-full">
@@ -34,16 +46,43 @@ export function GroupCard({ group, variant = 'default' }: GroupCardProps) {
         {/* Platform accent gradient top strip */}
         <div className={cn('absolute top-0 left-0 right-0 h-px bg-gradient-to-r', accent)} />
 
-        {/* Header row */}
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-w-0 flex-1 pr-4">
-            {group.name}
-          </h3>
-          {group.countries?.flag_emoji && (
-            <span className="text-xl flex-shrink-0 leading-none" title={group.countries.name}>
-              {group.countries.flag_emoji}
-            </span>
-          )}
+        {/* Header row with icon */}
+        <div className="flex items-start gap-3">
+          {/* Group icon — real image or colored initials fallback */}
+          {(group as any).icon_url ? (
+            <img
+              src={(group as any).icon_url}
+              alt={group.name}
+              className="w-10 h-10 rounded-xl object-cover flex-shrink-0 shadow-sm border border-border/30"
+              onError={(e) => {
+                const el = e.currentTarget
+                el.style.display = 'none'
+                const fallback = el.nextElementSibling as HTMLElement
+                if (fallback) fallback.style.display = 'flex'
+              }}
+            />
+          ) : null}
+          <div
+            className="w-10 h-10 rounded-xl items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm"
+            style={{
+              backgroundColor: color,
+              display: (group as any).icon_url ? 'none' : 'flex',
+            }}
+          >
+            {initials || '?'}
+          </div>
+
+          {/* Name + flag */}
+          <div className="flex items-start justify-between gap-1 flex-1 min-w-0">
+            <h3 className="font-semibold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-w-0 flex-1">
+              {group.name}
+            </h3>
+            {group.countries?.flag_emoji && (
+              <span className="text-lg flex-shrink-0 leading-none mt-0.5" title={group.countries.name}>
+                {group.countries.flag_emoji}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Description */}

@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
     }
 
-    const { website, recaptcha_token, ...groupData } = parsed.data
+    const { website, recaptcha_token, icon_url, tags, ...groupData } = parsed.data
 
     // Honeypot check
     if (website) {
@@ -139,6 +139,8 @@ export async function POST(request: NextRequest) {
         country_code: groupData.country_code,
         language_code: groupData.language_code,
         description: groupData.description || null,
+        icon_url: icon_url || null,
+        tags: tags ?? [],
         submitter_ip_hash: ipHash,
         is_approved: true,
       })

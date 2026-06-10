@@ -17,7 +17,7 @@ import {
 import { submitGroupSchema, type SubmitGroupInput } from '@/lib/validations/group.schema'
 import { PLATFORMS, LANGUAGES } from '@/lib/constants'
 import type { Category, Country } from '@/types/group'
-import { CheckCircle, Plus, Globe2, MessageCircle, Hash } from 'lucide-react'
+import { CheckCircle, Plus, Globe2, MessageCircle, Hash, X } from 'lucide-react'
 import Link from 'next/link'
 
 const platformIcons: Record<string, { icon: React.ReactNode; color: string; bg: string }> = {
@@ -31,6 +31,8 @@ export default function SubmitPage() {
   const [countries, setCountries] = useState<Country[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [tags, setTags] = useState<string[]>([])
+  const [tagInput, setTagInput] = useState('')
 
   const {
     register,
@@ -69,6 +71,8 @@ export default function SubmitPage() {
         setSubmitted(true)
         toast.success("Group added! It's now live on the site.")
         reset()
+        setTags([])
+        setTagInput('')
       } else if (res.status === 409) {
         toast.error('This group is already listed.')
       } else if (res.status === 429) {
@@ -81,6 +85,21 @@ export default function SubmitPage() {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const addTag = (value: string) => {
+    const trimmed = value.trim().replace(/^#/, '').toLowerCase()
+    if (!trimmed || trimmed.length > 30 || tags.length >= 10 || tags.includes(trimmed)) return
+    const newTags = [...tags, trimmed]
+    setTags(newTags)
+    setValue('tags', newTags)
+    setTagInput('')
+  }
+
+  const removeTag = (tag: string) => {
+    const newTags = tags.filter((t) => t !== tag)
+    setTags(newTags)
+    setValue('tags', newTags)
   }
 
   if (submitted) {
@@ -251,6 +270,31 @@ export default function SubmitPage() {
               </Select>
             </div>
 
+            {/* Group Icon URL */}
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold">
+                Group Icon URL{' '}
+                <span className="text-muted-foreground font-normal">(optional)</span>
+              </label>
+              <div className="flex items-center gap-3">
+                {watch('icon_url') && (
+                  <img
+                    src={watch('icon_url')}
+                    alt="Group icon preview"
+                    className="w-10 h-10 rounded-xl object-cover flex-shrink-0 border border-border"
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                  />
+                )}
+                <Input
+                  {...register('icon_url')}
+                  placeholder="https://example.com/group-icon.jpg"
+                  className={`h-11 ${errors.icon_url ? 'border-destructive' : ''}`}
+                />
+              </div>
+              {errors.icon_url && <p className="text-xs text-destructive">{errors.icon_url.message}</p>}
+              <p className="text-xs text-muted-foreground">Paste a direct image URL for your group photo</p>
+            </div>
+
             {/* Description */}
             <div className="space-y-1.5">
               <label className="text-sm font-semibold">
@@ -265,6 +309,55 @@ export default function SubmitPage() {
                 className={`w-full rounded-lg border bg-background px-3 py-2.5 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none transition-colors ${errors.description ? 'border-destructive' : 'border-input hover:border-border'}`}
               />
               {errors.description && <p className="text-xs text-destructive">{errors.description.message}</p>}
+            </div>
+
+            {/* Tags */}
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold">
+                Tags{' '}
+                <span className="text-muted-foreground font-normal">(optional, up to 10)</span>
+              </label>
+              <div className={`min-h-[44px] flex flex-wrap gap-1.5 items-center rounded-lg border bg-background px-3 py-2 transition-colors focus-within:ring-2 focus-within:ring-ring ${errors.tags ? 'border-destructive' : 'border-input'}`}>
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-1 text-xs bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 rounded-full px-2.5 py-1 font-medium"
+                  >
+                    #{tag}
+                    <button
+                      type="button"
+                      onClick={() => removeTag(tag)}
+                      className="text-blue-400 hover:text-blue-600 dark:hover:text-blue-200 ml-0.5 leading-none"
+                      aria-label={`Remove tag ${tag}`}
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </span>
+                ))}
+                {tags.length < 10 && (
+                  <input
+                    type="text"
+                    value={tagInput}
+                    onChange={(e) => setTagInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ',') {
+                        e.preventDefault()
+                        addTag(tagInput)
+                      } else if (e.key === 'Backspace' && !tagInput && tags.length > 0) {
+                        removeTag(tags[tags.length - 1])
+                      }
+                    }}
+                    onBlur={() => { if (tagInput.trim()) addTag(tagInput) }}
+                    placeholder={tags.length === 0 ? 'Type a tag and press Enter...' : ''}
+                    className="flex-1 min-w-[140px] bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                    maxLength={31}
+                  />
+                )}
+              </div>
+              {errors.tags && <p className="text-xs text-destructive">{errors.tags.message}</p>}
+              <p className="text-xs text-muted-foreground">
+                Keywords that help people find your group (e.g. crypto, gaming, music)
+              </p>
             </div>
           </div>
 

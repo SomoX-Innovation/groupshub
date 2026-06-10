@@ -84,20 +84,23 @@ export default async function GroupPage({ params }: GroupPageProps) {
     .neq('id', g.id)
     .limit(4)
 
-  const schema = groupSchema({
+  const groupSchemas = groupSchema({
     name: g.name,
     description: g.description,
     platform: g.platform,
     invite_link: g.invite_link,
     slug: g.slug,
     created_at: g.created_at,
+    updated_at: g.updated_at,
     category: g.categories?.name,
     country: g.countries?.name,
   })
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      {groupSchemas.map((s: unknown, i: number) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }} />
+      ))}
       <div className="container mx-auto px-4 py-10 max-w-4xl">
         {/* Header */}
         <div className="flex items-start justify-between gap-4 mb-6">

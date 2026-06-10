@@ -12,6 +12,8 @@ export const submitGroupSchema = z.object({
   country_code: z.string().length(2, 'Select a country'),
   language_code: z.string().min(2).max(2).optional(),
   description: z.string().max(300, 'Description max 300 characters').optional(),
+  icon_url: z.string().url('Must be a valid image URL').optional().or(z.literal('')),
+  tags: z.array(z.string().min(1).max(30)).max(10, 'Maximum 10 tags').optional(),
   website: z.string().max(0, 'Bot detected').optional(),
   recaptcha_token: z.string().optional(),
 }).refine(

@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { GroupGrid } from '@/components/groups/GroupGrid'
 import { Pagination } from '@/components/browse/Pagination'
 import { buildCategoryMetadata } from '@/lib/seo/metadata'
-import { itemListSchema } from '@/lib/seo/schema-markup'
+import { categoryPageSchema } from '@/lib/seo/schema-markup'
 import type { Metadata } from 'next'
 import { PAGE_SIZE } from '@/lib/constants'
 import Link from 'next/link'
@@ -74,14 +74,18 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     { platform: 'discord', label: 'Discord', color: '#5865F2' },
   ]
 
-  const schema = itemListSchema(
-    groups.map((g) => ({ name: g.name, slug: g.slug })),
-    `${category.name} Groups`
-  )
+  const schemas = categoryPageSchema({
+    categoryName: category.name,
+    platform: 'whatsapp',
+    groups: groups.map((g) => ({ name: g.name, slug: g.slug })),
+    categorySlug: params.category,
+  })
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      {schemas.map((s, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }} />
+      ))}
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Header */}
         <div className="mb-8">

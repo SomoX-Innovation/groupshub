@@ -31,6 +31,7 @@ export interface Database {
           featured_until: string | null
           submitter_ip_hash: string | null
           search_vector: string | null
+          icon_url: string | null
           created_at: string
           updated_at: string
         }
@@ -49,6 +50,7 @@ export interface Database {
           is_featured?: boolean
           is_verified?: boolean
           is_approved?: boolean
+          icon_url?: string | null
           reported_count?: number
           views?: number
           joins_count?: number
@@ -77,6 +79,7 @@ export interface Database {
           joins_count?: number
           featured_until?: string | null
           submitter_ip_hash?: string | null
+          icon_url?: string | null
           created_at?: string
           updated_at?: string
         }

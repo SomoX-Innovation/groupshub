@@ -12,8 +12,13 @@ import { websiteSchema } from '@/lib/seo/schema-markup'
 export const revalidate = 600
 
 export const metadata: Metadata = {
-  title: 'GroupsHub — Global WhatsApp, Telegram & Discord Group Directory',
-  description: 'Find and join the best WhatsApp, Telegram, and Discord groups worldwide. Browse 10,000+ communities across 195 countries and 50+ categories.',
+  title: 'GroupsHub — Find & Join WhatsApp Groups, Telegram Groups & Discord Servers 2025',
+  description: 'Find and join the best WhatsApp group links, Telegram groups, and Discord servers in 2025. Browse 10,000+ active communities across 195 countries and 50+ categories. Free, no sign-in required.',
+  alternates: { canonical: process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com' },
+  openGraph: {
+    title: 'GroupsHub — #1 Free WhatsApp, Telegram & Discord Group Directory',
+    description: 'Join WhatsApp groups, Telegram channels and Discord servers instantly. 10,000+ verified active communities in 50+ categories and 195 countries.',
+  },
 }
 
 async function getTrendingGroups() {
@@ -60,10 +65,13 @@ export default async function HomePage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      {schema.map((s, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
+        />
+      ))}
       <HeroSection />
       <StatsBar />
       <Suspense fallback={<div className="py-12"><div className="container mx-auto px-4"><GroupGridSkeleton count={8} /></div></div>}>

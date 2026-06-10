@@ -8,11 +8,7 @@ import { SearchBar } from '@/components/search/SearchBar'
 import type { Metadata } from 'next'
 import type { GroupFilters } from '@/types/group'
 import { PAGE_SIZE } from '@/lib/constants'
-
-export const metadata: Metadata = {
-  title: 'Browse Groups — Find WhatsApp, Telegram & Discord Communities',
-  description: 'Browse thousands of WhatsApp, Telegram, and Discord groups. Filter by platform, category, country, and language.',
-}
+import { buildBrowseMetadata } from '@/lib/seo/metadata'
 
 async function getGroups(filters: GroupFilters) {
   const supabase = createClient()
@@ -73,6 +69,15 @@ interface BrowsePageProps {
     page?: string
     q?: string
   }
+}
+
+export async function generateMetadata({ searchParams }: BrowsePageProps): Promise<Metadata> {
+  return buildBrowseMetadata({
+    platform: searchParams.platform,
+    category: searchParams.category,
+    country: searchParams.country,
+    q: searchParams.q,
+  })
 }
 
 export default async function BrowsePage({ searchParams }: BrowsePageProps) {
