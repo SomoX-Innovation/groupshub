@@ -8,6 +8,7 @@ import { GroupGrid } from '@/components/groups/GroupGrid'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Eye, Users, Calendar } from 'lucide-react'
+import { ShareButton } from '@/components/groups/ShareButton'
 import { buildGroupMetadata } from '@/lib/seo/metadata'
 import { groupSchema } from '@/lib/seo/schema-markup'
 import type { Metadata } from 'next'
@@ -148,13 +149,14 @@ export default async function GroupPage({ params }: GroupPageProps) {
           </span>
         </div>
 
-        {/* Join Button */}
-        <div className="flex items-center gap-3 mb-8">
+        {/* Join + Share */}
+        <div className="flex items-center gap-3 mb-8 flex-wrap">
           <JoinButton
             groupSlug={g.slug}
             inviteLink={g.invite_link}
             platform={g.platform}
           />
+          <ShareButton groupName={g.name} slug={g.slug} />
           <ReportDialog groupId={g.id} />
         </div>
 
