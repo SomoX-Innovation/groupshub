@@ -26,17 +26,18 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'GroupsHub — Find & Join WhatsApp, Telegram & Discord Groups 2025',
+    default: 'WhatsApp Group Links, Telegram Groups & Discord Servers — GroupsHub',
     template: '%s | GroupsHub',
   },
   description: 'GroupsHub is the #1 free directory to find and join WhatsApp groups, Telegram groups, and Discord servers. Browse 10,000+ active communities across 195 countries and 50+ categories. No sign-in required.',
   metadataBase: new URL(APP_URL),
   keywords: [
-    'whatsapp group links', 'telegram groups', 'discord servers', 'join whatsapp groups',
-    'whatsapp group directory', 'telegram group directory', 'discord server list',
-    'whatsapp group invite links 2025', 'find telegram groups', 'discord community finder',
+    'whatsapp group links', 'whatsapp groups to join', 'join whatsapp group',
+    'telegram groups', 'telegram group links', 'discord servers',
+    'whatsapp group invite link', 'whatsapp group directory', 'telegram group directory',
+    'discord server list', 'find whatsapp groups', 'discord community finder',
     'active whatsapp groups', 'best telegram channels', 'public discord servers',
-    'whatsapp groups to join', 'free group directory',
+    'free group links', 'group invite links', 'whatsapp community links',
   ],
   openGraph: {
     type: 'website',

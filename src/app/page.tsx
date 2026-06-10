@@ -5,19 +5,30 @@ import { StatsBar } from '@/components/home/StatsBar'
 import { TrendingGroups } from '@/components/home/TrendingGroups'
 import { GroupsByContinent } from '@/components/home/GroupsByContinent'
 import { CategoriesGrid } from '@/components/home/CategoriesGrid'
+import { SeoContent } from '@/components/home/SeoContent'
 import { GroupGridSkeleton } from '@/components/groups/GroupCardSkeleton'
 import type { Metadata } from 'next'
 import { websiteSchema } from '@/lib/seo/schema-markup'
 
 export const revalidate = 600
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
+
 export const metadata: Metadata = {
-  title: 'GroupsHub — Find & Join WhatsApp Groups, Telegram Groups & Discord Servers 2025',
-  description: 'Find and join the best WhatsApp group links, Telegram groups, and Discord servers in 2025. Browse 10,000+ active communities across 195 countries and 50+ categories. Free, no sign-in required.',
-  alternates: { canonical: process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com' },
+  title: 'WhatsApp Group Links, Telegram Groups & Discord Servers 2026 — GroupsHub',
+  description: 'Find and join the best WhatsApp group links, Telegram groups, and Discord servers in 2026. Browse 10,000+ active communities across 195 countries and 50+ categories. Free — no sign-in required.',
+  alternates: { canonical: APP_URL },
+  keywords: [
+    'whatsapp group links 2026', 'whatsapp groups to join', 'telegram group links',
+    'discord servers to join', 'join whatsapp group', 'whatsapp group invite link',
+    'telegram groups list', 'discord server list', 'whatsapp group directory',
+    'find whatsapp groups', 'active whatsapp groups', 'best telegram channels 2026',
+    'public discord servers', 'free group links', 'group link directory',
+  ],
   openGraph: {
-    title: 'GroupsHub — #1 Free WhatsApp, Telegram & Discord Group Directory',
-    description: 'Join WhatsApp groups, Telegram channels and Discord servers instantly. 10,000+ verified active communities in 50+ categories and 195 countries.',
+    title: 'WhatsApp Group Links, Telegram Groups & Discord Servers — GroupsHub',
+    description: 'Join WhatsApp groups, Telegram channels and Discord servers instantly. 10,000+ active communities in 50+ categories and 195 countries. Free, no sign-in.',
+    images: [{ url: `${APP_URL}/api/og`, width: 1200, height: 630, alt: 'GroupsHub — WhatsApp Telegram Discord Group Directory' }],
   },
 }
 
@@ -81,6 +92,7 @@ export default async function HomePage() {
         <GroupsByContinent groups={continentGroups as any} />
       </Suspense>
       <CategoriesGrid categories={categories} />
+      <SeoContent />
     </>
   )
 }
