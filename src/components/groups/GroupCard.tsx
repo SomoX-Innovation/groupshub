@@ -50,6 +50,7 @@ export function GroupCard({ group, variant = 'default' }: GroupCardProps) {
         <div className="flex items-start gap-3">
           {/* Group icon — real image or colored initials fallback */}
           {(group as any).icon_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={(group as any).icon_url}
               alt={group.name}

@@ -278,6 +278,7 @@ export default function SubmitPage() {
               </label>
               <div className="flex items-center gap-3">
                 {watch('icon_url') && (
+                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={watch('icon_url')}
                     alt="Group icon preview"
