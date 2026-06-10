@@ -32,6 +32,11 @@ export const metadata: Metadata = {
     description: 'Find and join the best WhatsApp, Telegram, and Discord groups worldwide.',
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
