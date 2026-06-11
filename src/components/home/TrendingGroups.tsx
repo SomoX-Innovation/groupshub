@@ -24,7 +24,7 @@ export function TrendingGroups({ groups }: TrendingGroupsProps) {
             </div>
           </div>
           <Link
-            href="/browse?sort=trending"
+            href="/groupshub/browse?sort=trending"
             className="group hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-1.5 rounded-full border border-border/60 hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-all duration-200"
           >
             See all
@@ -46,7 +46,7 @@ export function TrendingGroups({ groups }: TrendingGroupsProps) {
 
         <div className="mt-6 text-center sm:hidden">
           <Link
-            href="/browse?sort=trending"
+            href="/groupshub/browse?sort=trending"
             className="inline-flex items-center gap-2 rounded-full border border-border/60 px-6 py-2.5 text-sm font-semibold hover:bg-muted transition-colors"
           >
             See all trending groups <ArrowRight className="h-4 w-4" />

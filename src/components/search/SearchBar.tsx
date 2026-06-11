@@ -63,7 +63,7 @@ export function SearchBar({ initialQuery = '' }: { initialQuery?: string }) {
     e.preventDefault()
     if (query.trim()) {
       setIsOpen(false)
-      router.push(`/browse?q=${encodeURIComponent(query.trim())}`)
+      router.push(`/groupshub/browse?q=${encodeURIComponent(query.trim())}`)
     }
   }
 
@@ -98,7 +98,7 @@ export function SearchBar({ initialQuery = '' }: { initialQuery?: string }) {
           {results.map((result) => (
             <Link
               key={result.id}
-              href={`/groups/${result.slug}`}
+              href={`/groupshub/groups/${result.slug}`}
               className="flex items-center gap-3 px-4 py-2.5 hover:bg-muted transition-colors"
               onClick={() => { setIsOpen(false); setQuery(result.name) }}
             >
@@ -119,7 +119,7 @@ export function SearchBar({ initialQuery = '' }: { initialQuery?: string }) {
             </Link>
           ))}
           <Link
-            href={`/browse?q=${encodeURIComponent(query)}`}
+            href={`/groupshub/browse?q=${encodeURIComponent(query)}`}
             className="flex items-center justify-center gap-1 py-2 text-xs text-primary hover:bg-muted transition-colors border-t"
             onClick={() => setIsOpen(false)}
           >

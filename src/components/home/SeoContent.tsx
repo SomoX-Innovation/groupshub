@@ -174,7 +174,7 @@ export function SeoContent() {
             {topCountries.map((c) => (
               <Link
                 key={c.code}
-                href={`/groups/country/${c.code.toLowerCase()}`}
+                href={`/groupshub/groups/country/${c.code.toLowerCase()}`}
                 className="glass-card rounded-xl p-3 text-center hover:-translate-y-0.5 transition-transform group"
               >
                 <div className="text-2xl mb-1">{c.flag}</div>
@@ -183,7 +183,7 @@ export function SeoContent() {
             ))}
           </div>
           <div className="text-center mt-6">
-            <Link href="/browse" className="text-sm text-primary hover:underline font-medium">
+            <Link href="/groupshub/browse" className="text-sm text-primary hover:underline font-medium">
               Browse all 195 countries →
             </Link>
           </div>
@@ -217,7 +217,7 @@ export function SeoContent() {
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <Link
-              href="/submit"
+              href="/groupshub/submit"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-200"
             >
               Add Your Group — Free

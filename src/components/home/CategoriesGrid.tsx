@@ -36,7 +36,7 @@ export function CategoriesGrid({ categories }: CategoriesGridProps) {
             </div>
           </div>
           <Link
-            href="/browse"
+            href="/groupshub/browse"
             className="group hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-1.5 rounded-full border border-border/60 hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-all duration-200"
           >
             View all
@@ -74,7 +74,7 @@ export function CategoriesGrid({ categories }: CategoriesGridProps) {
         {/* Mobile see all */}
         <div className="mt-6 text-center sm:hidden">
           <Link
-            href="/browse"
+            href="/groupshub/browse"
             className="inline-flex items-center gap-2 rounded-full border border-border/60 px-6 py-2.5 text-sm font-semibold hover:bg-muted transition-colors"
           >
             View all categories <ArrowRight className="h-4 w-4" />

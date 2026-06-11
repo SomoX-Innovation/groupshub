@@ -38,7 +38,7 @@ export function GroupCard({ group, variant = 'default' }: GroupCardProps) {
     .join('')
 
   return (
-    <Link href={`/groups/${group.slug}`} className="block h-full">
+    <Link href={`/groupshub/groups/${group.slug}`} className="block h-full">
       <div className={cn(
         'glass-card rounded-2xl p-4 flex flex-col h-full gap-2.5 cursor-pointer transition-all duration-300 hover:-translate-y-1 border border-border/50 dark:border-white/[0.07] group relative overflow-hidden',
         glow

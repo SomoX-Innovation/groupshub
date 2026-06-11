@@ -97,14 +97,14 @@ export function HeroSection() {
           style={{ animationDelay: '0.35s', animationFillMode: 'both' }}
         >
           <Link
-            href="/browse"
+            href="/groupshub/browse"
             className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass border border-border/50 text-sm font-semibold transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
           >
             Browse Groups
             <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link
-            href="/submit"
+            href="/groupshub/submit"
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-violet-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-200"
           >
             <Plus className="h-3.5 w-3.5" />

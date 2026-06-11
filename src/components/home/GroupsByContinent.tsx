@@ -47,7 +47,7 @@ export function GroupsByContinent({ groups }: GroupsByContinentProps) {
             </div>
           </div>
           <Link
-            href="/browse"
+            href="/groupshub/browse"
             className="group hidden sm:flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
           >
             Browse all
@@ -103,7 +103,7 @@ export function GroupsByContinent({ groups }: GroupsByContinentProps) {
             <p className="text-4xl mb-3">🌍</p>
             <p className="text-muted-foreground">No groups from this region yet.</p>
             <Link
-              href="/submit"
+              href="/groupshub/submit"
               className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-primary hover:underline"
             >
               Submit the first one! <ArrowRight className="h-3.5 w-3.5" />

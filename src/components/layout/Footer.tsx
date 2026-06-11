@@ -2,58 +2,58 @@ import Link from 'next/link'
 import { Globe2 } from 'lucide-react'
 
 const whatsappCategories = [
-  { href: '/whatsapp-groups/education', label: 'Education WhatsApp Groups' },
-  { href: '/whatsapp-groups/business', label: 'Business WhatsApp Groups' },
-  { href: '/whatsapp-groups/gaming', label: 'Gaming WhatsApp Groups' },
-  { href: '/whatsapp-groups/technology', label: 'Tech WhatsApp Groups' },
-  { href: '/whatsapp-groups/music', label: 'Music WhatsApp Groups' },
-  { href: '/whatsapp-groups/sports', label: 'Sports WhatsApp Groups' },
-  { href: '/whatsapp-groups/crypto', label: 'Crypto WhatsApp Groups' },
-  { href: '/whatsapp-groups/health', label: 'Health WhatsApp Groups' },
+  { href: '/groupshub/whatsapp-groups/education', label: 'Education WhatsApp Groups' },
+  { href: '/groupshub/whatsapp-groups/business', label: 'Business WhatsApp Groups' },
+  { href: '/groupshub/whatsapp-groups/gaming', label: 'Gaming WhatsApp Groups' },
+  { href: '/groupshub/whatsapp-groups/technology', label: 'Tech WhatsApp Groups' },
+  { href: '/groupshub/whatsapp-groups/music', label: 'Music WhatsApp Groups' },
+  { href: '/groupshub/whatsapp-groups/sports', label: 'Sports WhatsApp Groups' },
+  { href: '/groupshub/whatsapp-groups/crypto', label: 'Crypto WhatsApp Groups' },
+  { href: '/groupshub/whatsapp-groups/health', label: 'Health WhatsApp Groups' },
 ]
 
 const telegramCategories = [
-  { href: '/telegram-groups/education', label: 'Education Telegram Groups' },
-  { href: '/telegram-groups/business', label: 'Business Telegram Groups' },
-  { href: '/telegram-groups/crypto', label: 'Crypto Telegram Groups' },
-  { href: '/telegram-groups/technology', label: 'Tech Telegram Groups' },
-  { href: '/telegram-groups/gaming', label: 'Gaming Telegram Groups' },
-  { href: '/telegram-groups/news', label: 'News Telegram Channels' },
-  { href: '/telegram-groups/music', label: 'Music Telegram Groups' },
-  { href: '/telegram-groups/sports', label: 'Sports Telegram Groups' },
+  { href: '/groupshub/telegram-groups/education', label: 'Education Telegram Groups' },
+  { href: '/groupshub/telegram-groups/business', label: 'Business Telegram Groups' },
+  { href: '/groupshub/telegram-groups/crypto', label: 'Crypto Telegram Groups' },
+  { href: '/groupshub/telegram-groups/technology', label: 'Tech Telegram Groups' },
+  { href: '/groupshub/telegram-groups/gaming', label: 'Gaming Telegram Groups' },
+  { href: '/groupshub/telegram-groups/news', label: 'News Telegram Channels' },
+  { href: '/groupshub/telegram-groups/music', label: 'Music Telegram Groups' },
+  { href: '/groupshub/telegram-groups/sports', label: 'Sports Telegram Groups' },
 ]
 
 const discordCategories = [
-  { href: '/discord-groups/gaming', label: 'Gaming Discord Servers' },
-  { href: '/discord-groups/technology', label: 'Tech Discord Servers' },
-  { href: '/discord-groups/anime', label: 'Anime Discord Servers' },
-  { href: '/discord-groups/music', label: 'Music Discord Servers' },
-  { href: '/discord-groups/crypto', label: 'Crypto Discord Servers' },
-  { href: '/discord-groups/education', label: 'Education Discord Servers' },
-  { href: '/discord-groups/art', label: 'Art Discord Servers' },
-  { href: '/discord-groups/sports', label: 'Sports Discord Servers' },
+  { href: '/groupshub/discord-groups/gaming', label: 'Gaming Discord Servers' },
+  { href: '/groupshub/discord-groups/technology', label: 'Tech Discord Servers' },
+  { href: '/groupshub/discord-groups/anime', label: 'Anime Discord Servers' },
+  { href: '/groupshub/discord-groups/music', label: 'Music Discord Servers' },
+  { href: '/groupshub/discord-groups/crypto', label: 'Crypto Discord Servers' },
+  { href: '/groupshub/discord-groups/education', label: 'Education Discord Servers' },
+  { href: '/groupshub/discord-groups/art', label: 'Art Discord Servers' },
+  { href: '/groupshub/discord-groups/sports', label: 'Sports Discord Servers' },
 ]
 
 const countryLinks = [
-  { href: '/groups/country/in', label: 'India Groups' },
-  { href: '/groups/country/ng', label: 'Nigeria Groups' },
-  { href: '/groups/country/us', label: 'USA Groups' },
-  { href: '/groups/country/pk', label: 'Pakistan Groups' },
-  { href: '/groups/country/gb', label: 'UK Groups' },
-  { href: '/groups/country/za', label: 'South Africa Groups' },
-  { href: '/groups/country/id', label: 'Indonesia Groups' },
-  { href: '/groups/country/gh', label: 'Ghana Groups' },
-  { href: '/groups/country/ke', label: 'Kenya Groups' },
-  { href: '/groups/country/ph', label: 'Philippines Groups' },
+  { href: '/groupshub/groups/country/in', label: 'India Groups' },
+  { href: '/groupshub/groups/country/ng', label: 'Nigeria Groups' },
+  { href: '/groupshub/groups/country/us', label: 'USA Groups' },
+  { href: '/groupshub/groups/country/pk', label: 'Pakistan Groups' },
+  { href: '/groupshub/groups/country/gb', label: 'UK Groups' },
+  { href: '/groupshub/groups/country/za', label: 'South Africa Groups' },
+  { href: '/groupshub/groups/country/id', label: 'Indonesia Groups' },
+  { href: '/groupshub/groups/country/gh', label: 'Ghana Groups' },
+  { href: '/groupshub/groups/country/ke', label: 'Kenya Groups' },
+  { href: '/groupshub/groups/country/ph', label: 'Philippines Groups' },
 ]
 
 const quickLinks = [
-  { href: '/browse', label: 'Browse All Groups' },
-  { href: '/browse?platform=whatsapp', label: 'WhatsApp Groups' },
-  { href: '/browse?platform=telegram', label: 'Telegram Groups' },
-  { href: '/browse?platform=discord', label: 'Discord Servers' },
-  { href: '/submit', label: 'Add Your Group' },
-  { href: '/pricing', label: 'Get Featured' },
+  { href: '/groupshub/browse', label: 'Browse All Groups' },
+  { href: '/groupshub/browse?platform=whatsapp', label: 'WhatsApp Groups' },
+  { href: '/groupshub/browse?platform=telegram', label: 'Telegram Groups' },
+  { href: '/groupshub/browse?platform=discord', label: 'Discord Servers' },
+  { href: '/groupshub/submit', label: 'Add Your Group' },
+  { href: '/groupshub/pricing', label: 'Get Featured' },
 ]
 
 export function Footer() {
@@ -66,7 +66,7 @@ export function Footer() {
 
           {/* Brand + quick links */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
-            <Link href="/" className="flex items-center gap-2 font-extrabold text-lg group w-fit">
+            <Link href="/groupshub" className="flex items-center gap-2 font-extrabold text-lg group w-fit">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
                 <Globe2 className="h-4 w-4 text-white" />
               </div>
@@ -144,7 +144,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/browse" className="text-xs text-primary hover:underline">
+                <Link href="/groupshub/browse" className="text-xs text-primary hover:underline">
                   All 195 countries →
                 </Link>
               </li>

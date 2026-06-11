@@ -27,7 +27,7 @@ export function Navbar() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    if (searchQuery.trim()) router.push(`/browse?q=${encodeURIComponent(searchQuery.trim())}`)
+    if (searchQuery.trim()) router.push(`/groupshub/browse?q=${encodeURIComponent(searchQuery.trim())}`)
   }
 
   return (
@@ -40,7 +40,7 @@ export function Navbar() {
       )}>
         <div className="container mx-auto px-4 h-16 flex items-center gap-3">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-extrabold text-lg shrink-0 group">
+          <Link href="/groupshub" className="flex items-center gap-2 font-extrabold text-lg shrink-0 group">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
               <Globe2 className="h-4 w-4 text-white" />
             </div>
@@ -64,10 +64,10 @@ export function Navbar() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1 ml-auto">
             <Link
-              href="/browse"
+              href="/groupshub/browse"
               className={cn(
                 'px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted',
-                pathname === '/browse'
+                pathname.startsWith('/groupshub/browse')
                   ? 'text-foreground bg-muted'
                   : 'text-muted-foreground hover:text-foreground'
               )}
@@ -75,7 +75,7 @@ export function Navbar() {
               Browse
             </Link>
             <Link
-              href="/submit"
+              href="/groupshub/submit"
               className="ml-1 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold bg-gradient-to-r from-blue-500 to-violet-600 text-white shadow-md shadow-blue-500/25 hover:shadow-blue-500/40 hover:from-blue-600 hover:to-violet-700 hover:-translate-y-0.5 transition-all duration-200"
             >
               <Plus className="h-3.5 w-3.5" />
@@ -97,7 +97,7 @@ export function Navbar() {
           {/* Mobile controls */}
           <div className="flex md:hidden items-center gap-2 ml-auto">
             <Link
-              href="/submit"
+              href="/groupshub/submit"
               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-blue-500 to-violet-600 text-white shadow-md shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-200"
             >
               <Plus className="h-3 w-3" />
@@ -147,13 +147,13 @@ export function Navbar() {
             />
           </form>
           <Link
-            href="/browse"
+            href="/groupshub/browse"
             className="flex items-center h-11 px-4 rounded-xl text-sm font-medium transition-all hover:bg-muted text-foreground"
           >
             Browse
           </Link>
           <Link
-            href="/submit"
+            href="/groupshub/submit"
             className="flex items-center justify-center gap-2 h-11 px-4 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-500 to-violet-600 text-white shadow-md shadow-blue-500/20 hover:from-blue-600 hover:to-violet-700 transition-all duration-200"
           >
             <Plus className="h-4 w-4" />
