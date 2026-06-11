@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
-import { Navbar } from '@/components/layout/Navbar'
+import { NavbarSwitcher } from '@/components/layout/NavbarSwitcher'
 import { FooterSwitcher } from '@/components/layout/FooterSwitcher'
 import { Toaster } from '@/components/ui/sonner'
 import { Analytics } from '@vercel/analytics/react'
@@ -103,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
+          <NavbarSwitcher />
           <main className="flex-1">{children}</main>
           <FooterSwitcher />
           <Toaster />

@@ -7,5 +7,6 @@ import { Footer } from './Footer'
 export function FooterSwitcher() {
   const pathname = usePathname()
   if (pathname === '/') return <FooterHome />
+  if (pathname.startsWith('/admin')) return null
   return <Footer />
 }
