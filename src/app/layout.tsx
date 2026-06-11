@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
+import { FooterSwitcher } from '@/components/layout/FooterSwitcher'
 import { Toaster } from '@/components/ui/sonner'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -105,7 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           <Navbar />
           <main className="flex-1">{children}</main>
-          <Footer />
+          <FooterSwitcher />
           <Toaster />
         </ThemeProvider>
         <ins className="eas6a97888e2" data-zoneid="5946976" suppressHydrationWarning />

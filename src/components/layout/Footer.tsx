@@ -1,8 +1,5 @@
-'use client'
-
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Globe2, Layers } from 'lucide-react'
+import { Globe2 } from 'lucide-react'
 
 const whatsappCategories = [
   { href: '/groupshub/whatsapp-groups/education', label: 'Education WhatsApp Groups' },
@@ -58,81 +55,12 @@ const quickLinks = [
   { href: '/groupshub/submit', label: 'Add Your Group' },
 ]
 
-const tools = [
-  { href: '/groupshub', label: 'GroupsHub', description: 'Group Directory', icon: '💬' },
-  { href: '#', label: 'PDF Tools', description: 'Coming soon', icon: '📄' },
-  { href: '#', label: 'Image Editor', description: 'Coming soon', icon: '🖼️' },
-  { href: '#', label: 'Link Shortener', description: 'Coming soon', icon: '🔗' },
-]
-
 export function Footer() {
-  const pathname = usePathname()
-  const isHome = pathname === '/'
-
-  if (isHome) {
-    return (
-      <footer className="border-t border-border/50 bg-background/95 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-10">
-          <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-8">
-            {/* Brand */}
-            <div className="space-y-3">
-              <Link href="/" className="flex items-center gap-2 font-extrabold text-lg group w-fit">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
-                  <Layers className="h-4 w-4 text-white" />
-                </div>
-                <span className="gradient-text">AnythingForYou</span>
-              </Link>
-              <p className="text-xs text-muted-foreground max-w-xs leading-relaxed">
-                A growing collection of free, fast, privacy-friendly online tools. No sign-up required.
-              </p>
-            </div>
-
-            {/* Tools list */}
-            <div className="space-y-3">
-              <h3 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground">Tools</h3>
-              <ul className="grid grid-cols-2 gap-x-10 gap-y-2">
-                {tools.map((t) => (
-                  <li key={t.label}>
-                    <Link
-                      href={t.href}
-                      className={`flex items-center gap-2 text-xs transition-colors ${
-                        t.href === '#'
-                          ? 'text-muted-foreground/50 cursor-not-allowed pointer-events-none'
-                          : 'text-muted-foreground hover:text-foreground'
-                      }`}
-                    >
-                      <span>{t.icon}</span>
-                      <span>{t.label}</span>
-                      {t.href === '#' && (
-                        <span className="text-[10px] bg-muted px-1.5 py-0.5 rounded-full">Soon</span>
-                      )}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-2">
-            <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} AnythingForYou. All rights reserved.
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Free tools, no sign-up required.
-            </p>
-          </div>
-        </div>
-      </footer>
-    )
-  }
-
-  // GroupsHub + all other pages — full footer
   return (
     <footer className="border-t border-border/50 bg-background/95 backdrop-blur-sm">
       <div className="container mx-auto px-4 py-14">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
 
-          {/* Brand + quick links */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
             <Link href="/groupshub" className="flex items-center gap-2 font-extrabold text-lg group w-fit">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
@@ -158,7 +86,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* WhatsApp */}
           <div className="space-y-3">
             <h3 className="font-semibold text-xs uppercase tracking-wider text-[#25D366]">WhatsApp</h3>
             <ul className="space-y-2">
@@ -172,7 +99,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Telegram */}
           <div className="space-y-3">
             <h3 className="font-semibold text-xs uppercase tracking-wider text-[#2AABEE]">Telegram</h3>
             <ul className="space-y-2">
@@ -186,7 +112,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Discord */}
           <div className="space-y-3">
             <h3 className="font-semibold text-xs uppercase tracking-wider text-[#5865F2]">Discord</h3>
             <ul className="space-y-2">
@@ -200,7 +125,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Countries */}
           <div className="space-y-3">
             <h3 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground">By Country</h3>
             <ul className="space-y-2">
