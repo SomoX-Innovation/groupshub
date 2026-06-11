@@ -163,7 +163,8 @@ export async function POST(request: NextRequest) {
       { message: 'Group submitted for review', id: newGroup.id, slug: newGroup.slug },
       { status: 201 }
     )
-  } catch {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  } catch (err) {
+    console.error('[POST /api/groups]', err)
+    return NextResponse.json({ error: String(err) }, { status: 500 })
   }
 }
