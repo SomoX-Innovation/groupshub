@@ -1,10 +1,16 @@
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'AnythingForYou — Free Online Tools',
   description: 'A growing collection of free, fast online tools. Group directories, PDF tools, image editors and more — no sign-up required.',
 }
+
+const LiquidEther = dynamic(() => import('@/components/ui/LiquidEther'), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-transparent" />,
+})
 
 const tools = [
   {
@@ -73,9 +79,25 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative overflow-hidden py-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-violet-500/5 to-transparent pointer-events-none" />
-        <div className="max-w-4xl mx-auto text-center relative">
+      <section className="relative overflow-hidden py-20 px-4" style={{ minHeight: '400px' }}>
+        {/* LiquidEther WebGL fluid background */}
+        <div className="absolute inset-0 z-0">
+          <LiquidEther
+            colors={['#3b82f6', '#8b5cf6', '#a855f7']}
+            mouseForce={20}
+            cursorSize={120}
+            resolution={0.5}
+            autoDemo={true}
+            autoSpeed={0.4}
+            autoIntensity={2.0}
+            autoResumeDelay={2000}
+            autoRampDuration={0.8}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </div>
+        {/* Overlay to keep text readable */}
+        <div className="absolute inset-0 z-10 bg-background/70 backdrop-blur-[1px]" />
+        <div className="max-w-4xl mx-auto text-center relative z-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Free tools, no sign-up required

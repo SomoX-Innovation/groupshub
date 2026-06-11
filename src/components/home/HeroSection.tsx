@@ -1,8 +1,14 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { SearchBar } from '@/components/search/SearchBar'
 import { Zap, ArrowRight, Plus } from 'lucide-react'
+
+const LiquidEther = dynamic(() => import('@/components/ui/LiquidEther'), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-violet-600/15 to-indigo-600/20" />,
+})
 
 const platforms = [
   { id: 'whatsapp', label: 'WhatsApp', border: 'border-[#25D366]/40', bg: 'bg-[#25D366]/10 hover:bg-[#25D366]/20', text: 'text-[#25D366]' },
@@ -10,48 +16,33 @@ const platforms = [
   { id: 'discord', label: 'Discord', border: 'border-[#5865F2]/40', bg: 'bg-[#5865F2]/10 hover:bg-[#5865F2]/20', text: 'text-[#5865F2]' },
 ]
 
-const floatingCards = [
-  { emoji: '💼', label: 'Business', count: '1.2k groups', delay: '0s', pos: { top: '15%', left: '2%' } },
-  { emoji: '🎮', label: 'Gaming', count: '3.4k groups', delay: '1.5s', pos: { top: '55%', left: '0%' } },
-  { emoji: '📚', label: 'Education', count: '2.1k groups', delay: '0.8s', pos: { top: '10%', right: '2%' } },
-  { emoji: '🎵', label: 'Music', count: '980 groups', delay: '2s', pos: { top: '60%', right: '0%' } },
-]
-
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden noise pt-10 pb-16 md:pt-12 md:pb-24">
-      {/* Background blobs */}
-      <div
-        className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-600/20 dark:bg-blue-600/10 rounded-full blur-3xl animate-blob pointer-events-none"
-        style={{ animationDelay: '0s' }}
-      />
-      <div
-        className="absolute -bottom-32 -right-32 w-[500px] h-[500px] bg-violet-600/20 dark:bg-violet-600/10 rounded-full blur-3xl animate-blob pointer-events-none"
-        style={{ animationDelay: '3s' }}
-      />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-indigo-600/10 dark:bg-indigo-600/05 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Grid overlay */}
-      <div className="hero-grid absolute inset-0 pointer-events-none" />
-
-      {/* Floating cards — desktop only */}
-      <div className="hidden xl:block">
-        {floatingCards.map((card) => (
-          <div
-            key={card.label}
-            className="absolute glass-card rounded-2xl px-4 py-3 flex items-center gap-3 animate-float"
-            style={{ animationDelay: card.delay, ...card.pos }}
-          >
-            <span className="text-2xl">{card.emoji}</span>
-            <div>
-              <p className="text-sm font-semibold leading-none">{card.label}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{card.count}</p>
-            </div>
-          </div>
-        ))}
+    <section className="relative overflow-hidden noise" style={{ minHeight: '600px' }}>
+      {/* LiquidEther WebGL fluid simulation — fills full hero area */}
+      <div className="absolute inset-0 z-0">
+        <LiquidEther
+          colors={['#3b82f6', '#8b5cf6', '#06b6d4']}
+          mouseForce={20}
+          cursorSize={100}
+          resolution={0.5}
+          autoDemo={true}
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+          style={{ width: '100%', height: '100%' }}
+        />
       </div>
 
-      <div className="container mx-auto px-4 relative">
+      {/* Dark overlay so text stays readable */}
+      <div className="absolute inset-0 z-10 bg-background/60 dark:bg-background/70 backdrop-blur-[1px]" />
+
+      {/* Grid overlay */}
+      <div className="hero-grid absolute inset-0 z-10 pointer-events-none" />
+
+      {/* Hero content — sits above WebGL canvas */}
+      <div className="relative z-20 container mx-auto px-4 pt-10 pb-16 md:pt-14 md:pb-24">
         {/* Badge */}
         <div className="flex justify-center mb-6 animate-fade-in">
           <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-sm font-medium">
@@ -120,7 +111,7 @@ export function HeroSection() {
           {platforms.map(({ id, label, border, bg, text }) => (
             <Link
               key={id}
-              href={`/browse?platform=${id}`}
+              href={`/groupshub/browse?platform=${id}`}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full border text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 ${bg} ${border} ${text}`}
             >
               {label}
