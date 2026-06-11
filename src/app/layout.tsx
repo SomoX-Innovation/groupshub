@@ -74,29 +74,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta name="google-adsense-account" content="ca-pub-2502916137600124" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2502916137600124"
-          crossOrigin="anonymous"
-        />
-        <script
-          async
-          type="application/javascript"
-          src="https://a.magsrv.com/ad-provider.js"
-        />
-        <script
-          async
-          type="application/javascript"
-          src="https://a.pemsrv.com/ad-provider.js"
-        />
-      </head>
       <body className={`${inter.className} antialiased min-h-screen flex flex-col`} suppressHydrationWarning>
-        <script type="application/javascript" dangerouslySetInnerHTML={{ __html: `pn_idzone=5947000;pn_sleep_seconds=0;pn_is_self_hosted=1;pn_soft_ask=0;pn_filename="/worker.js";var customTargeting={'ex_av':'name'};` }} />
-        <script async type="application/javascript" src="https://js.wpnsrv.com/pn.php" />
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script type="application/javascript" src="/popmagic.js" />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -108,15 +86,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <FooterSwitcher />
           <Toaster />
         </ThemeProvider>
-        <ins className="eas6a97888e2" data-zoneid="5946976" suppressHydrationWarning />
-        <ins className="eas6a97888e6" data-zoneid="5946982" suppressHydrationWarning />
-        <ins className="eas6a97888e17" data-zoneid="5946984" suppressHydrationWarning />
-        <ins className="eas6a97888e35" data-zoneid="5946986" suppressHydrationWarning />
-        <ins className="eas6a97888e10" data-zoneid="5946988" suppressHydrationWarning />
-        <ins className="eas6a97888e14" data-zoneid="5946992" suppressHydrationWarning />
-        <ins className="eas6a97888e33" data-zoneid="5946996" suppressHydrationWarning />
-        <ins className="eas6a97888e31" data-zoneid="5946998" suppressHydrationWarning />
-        <script dangerouslySetInnerHTML={{ __html: '(AdProvider = window.AdProvider || []).push({"serve": {}});' }} />
         <Analytics />
         <SpeedInsights />
       </body>
