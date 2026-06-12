@@ -14,7 +14,7 @@ import { groupSchema } from '@/lib/seo/schema-markup'
 import type { Metadata } from 'next'
 
 export const dynamicParams = true
-export const revalidate = 3600
+export const revalidate = 60
 
 interface GroupPageProps {
   params: { slug: string }
