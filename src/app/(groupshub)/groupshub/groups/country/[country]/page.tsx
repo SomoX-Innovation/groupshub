@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { GroupGrid } from '@/components/groups/GroupGrid'
 import { Pagination } from '@/components/browse/Pagination'
 import { buildCountryMetadata } from '@/lib/seo/metadata'
-import { countryPageSchema, countryFAQSchema } from '@/lib/seo/schema-markup'
+import { countryPageSchema, countryFAQSchema, countryHowToSchema, webPageSchema } from '@/lib/seo/schema-markup'
 import type { Metadata } from 'next'
 import { PAGE_SIZE } from '@/lib/constants'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
@@ -63,6 +63,7 @@ export default async function CountryPage({ params, searchParams }: CountryPageP
   const page = parseInt(searchParams.page || '1')
   const { groups, total, totalPages } = await getCountryGroups(params.country, page)
 
+  const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
   const schemas = [
     ...countryPageSchema({
       countryName: country.name,
@@ -70,6 +71,17 @@ export default async function CountryPage({ params, searchParams }: CountryPageP
       groups: groups.map((g) => ({ name: g.name, slug: g.slug })),
     }),
     countryFAQSchema(country.name, total),
+    countryHowToSchema(country.name),
+    webPageSchema({
+      name: `WhatsApp, Telegram & Discord Groups in ${country.name}`,
+      description: `Find and join ${total}+ WhatsApp groups, Telegram groups, and Discord servers from ${country.name}. Free invite links — no sign-in required.`,
+      url: `${APP_URL}/groupshub/groups/country/${params.country}`,
+      breadcrumbs: [
+        { name: 'Home', url: APP_URL },
+        { name: 'Browse', url: `${APP_URL}/groupshub/browse` },
+        { name: country.name, url: `${APP_URL}/groupshub/groups/country/${params.country}` },
+      ],
+    }),
   ]
 
   return (
@@ -94,6 +106,14 @@ export default async function CountryPage({ params, searchParams }: CountryPageP
           <p className="text-muted-foreground max-w-2xl">
             Find and join WhatsApp, Telegram, and Discord groups from {country.name}.
             Browse {total.toLocaleString()} active communities.
+          </p>
+        </div>
+
+        {/* Quick Answer — AEO featured snippet + AI engine target */}
+        <div className="quick-answer mb-8 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 p-4 max-w-2xl">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#25D366] mb-1.5">Quick Answer</div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            To find <strong className="text-foreground">WhatsApp groups in {country.name}</strong>: browse the {total.toLocaleString()}+ groups below → click any group → click <strong className="text-foreground">Join</strong> → open WhatsApp → tap <strong className="text-foreground">Join Group</strong>. Free, no sign-in required.
           </p>
         </div>
 

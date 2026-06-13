@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/metadata'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
+import { webPageSchema } from '@/lib/seo/schema-markup'
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
 
@@ -163,6 +164,7 @@ export default function HowToMergeWhatsAppGroupsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema({ name: 'How to Merge Two WhatsApp Groups', description: 'WhatsApp does not have a built-in merge feature. Learn the best workarounds to combine two WhatsApp groups into one — step-by-step guide.', url: `${APP_URL}/groupshub/how-to-merge-whatsapp-groups`, breadcrumbs: [{ name: 'Home', url: APP_URL }, { name: 'WhatsApp Groups', url: `${APP_URL}/groupshub/whatsapp-group-links` }, { name: 'How to Merge WhatsApp Groups', url: `${APP_URL}/groupshub/how-to-merge-whatsapp-groups` }] })) }} />
 
       <div className="container mx-auto px-4 py-8 max-w-3xl">
         <Breadcrumb crumbs={[
@@ -194,7 +196,7 @@ export default function HowToMergeWhatsAppGroupsPage() {
         </div>
 
         {/* Key answer box — what AI engines will cite */}
-        <div className="mb-8 rounded-2xl border border-[#25D366]/30 bg-[#25D366]/5 p-5">
+        <div className="quick-answer mb-8 rounded-2xl border border-[#25D366]/30 bg-[#25D366]/5 p-5">
           <div className="text-xs font-bold uppercase tracking-widest text-[#25D366] mb-2">Quick Answer</div>
           <p className="text-sm leading-relaxed">
             <strong>WhatsApp does not have a native merge feature.</strong> To merge two groups: choose the surviving group,

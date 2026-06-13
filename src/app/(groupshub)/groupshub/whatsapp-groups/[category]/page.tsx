@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { GroupGrid } from '@/components/groups/GroupGrid'
 import { Pagination } from '@/components/browse/Pagination'
 import { buildCategoryMetadata } from '@/lib/seo/metadata'
-import { categoryPageSchema, categoryFAQSchema } from '@/lib/seo/schema-markup'
+import { categoryPageSchema, categoryFAQSchema, categoryHowToSchema, webPageSchema } from '@/lib/seo/schema-markup'
 import type { Metadata } from 'next'
 import { PAGE_SIZE } from '@/lib/constants'
 import Link from 'next/link'
@@ -75,6 +75,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     { platform: 'discord', label: 'Discord', color: '#5865F2' },
   ]
 
+  const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
   const schemas = [
     ...categoryPageSchema({
       categoryName: category.name,
@@ -83,6 +84,17 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
       categorySlug: params.category,
     }),
     categoryFAQSchema(category.name, 'whatsapp', total),
+    categoryHowToSchema(category.name, 'whatsapp'),
+    webPageSchema({
+      name: `Best ${category.name} WhatsApp Groups`,
+      description: `Find and join the best ${category.name.toLowerCase()} WhatsApp groups. Browse ${total}+ active communities on GroupsHub — free invite links, no sign-in.`,
+      url: `${APP_URL}/groupshub/whatsapp-groups/${params.category}`,
+      breadcrumbs: [
+        { name: 'Home', url: APP_URL },
+        { name: 'WhatsApp Groups', url: `${APP_URL}/groupshub/whatsapp-group-links` },
+        { name: category.name, url: `${APP_URL}/groupshub/whatsapp-groups/${params.category}` },
+      ],
+    }),
   ]
 
   return (
@@ -126,6 +138,14 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
               </Link>
             ))}
           </div>
+        </div>
+
+        {/* Quick Answer — AEO featured snippet target */}
+        <div className="quick-answer mb-8 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 p-4 max-w-2xl">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#25D366] mb-1.5">Quick Answer</div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            To join a <strong className="text-foreground">{category.name} WhatsApp group</strong>: browse the {total.toLocaleString()}+ groups below → click any group → click <strong className="text-foreground">Join</strong> → open WhatsApp → tap <strong className="text-foreground">Join Group</strong>. Free, no sign-in required.
+          </p>
         </div>
 
         <GroupGrid groups={groups as any} />

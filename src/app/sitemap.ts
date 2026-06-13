@@ -29,6 +29,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/whatsapp-group-links`,                             lastModified: now, changeFrequency: 'daily',   priority: 0.98 },
     { url: `${BASE_URL}/telegram-group-links`,                             lastModified: now, changeFrequency: 'daily',   priority: 0.95 },
     { url: `${BASE_URL}/discord-server-links`,                             lastModified: now, changeFrequency: 'daily',   priority: 0.95 },
+    // Free tools
+    { url: `${BASE_URL}/qr-code-generator`,                                lastModified: now, changeFrequency: 'monthly', priority: 0.92 },
     // Trending / how-to content pages
     { url: `${BASE_URL}/world-cup-2026`,                                   lastModified: now, changeFrequency: 'hourly',  priority: 0.92 },
     { url: `${BASE_URL}/how-to-merge-whatsapp-groups`,                     lastModified: now, changeFrequency: 'monthly', priority: 0.85 },

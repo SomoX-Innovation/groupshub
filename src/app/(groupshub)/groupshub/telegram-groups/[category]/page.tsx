@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { GroupGrid } from '@/components/groups/GroupGrid'
 import { Pagination } from '@/components/browse/Pagination'
 import { buildCategoryMetadata } from '@/lib/seo/metadata'
-import { categoryPageSchema, categoryFAQSchema } from '@/lib/seo/schema-markup'
+import { categoryPageSchema, categoryFAQSchema, categoryHowToSchema, webPageSchema } from '@/lib/seo/schema-markup'
 import type { Metadata } from 'next'
 import { PAGE_SIZE } from '@/lib/constants'
 import Link from 'next/link'
@@ -61,6 +61,7 @@ export default async function TelegramCategoryPage({ params, searchParams }: Cat
   const page = parseInt(searchParams.page || '1')
   const { groups, total, totalPages } = await getCategoryGroups(category.id, page)
 
+  const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
   const schemas = [
     ...categoryPageSchema({
       categoryName: category.name,
@@ -69,6 +70,17 @@ export default async function TelegramCategoryPage({ params, searchParams }: Cat
       categorySlug: params.category,
     }),
     categoryFAQSchema(category.name, 'telegram', total),
+    categoryHowToSchema(category.name, 'telegram'),
+    webPageSchema({
+      name: `Best ${category.name} Telegram Groups`,
+      description: `Find and join the best ${category.name.toLowerCase()} Telegram groups. Browse ${total}+ active communities — free invite links, no sign-in.`,
+      url: `${APP_URL}/groupshub/telegram-groups/${params.category}`,
+      breadcrumbs: [
+        { name: 'Home', url: APP_URL },
+        { name: 'Telegram Groups', url: `${APP_URL}/groupshub/telegram-group-links` },
+        { name: category.name, url: `${APP_URL}/groupshub/telegram-groups/${params.category}` },
+      ],
+    }),
   ]
 
   return (
@@ -100,6 +112,12 @@ export default async function TelegramCategoryPage({ params, searchParams }: Cat
             <span className="text-muted-foreground">·</span>
             <Link href={`/discord-groups/${params.category}`} className="hover:underline text-muted-foreground">Discord</Link>
           </div>
+        </div>
+        <div className="quick-answer mb-8 rounded-2xl border border-[#2AABEE]/20 bg-[#2AABEE]/5 p-4 max-w-2xl">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#2AABEE] mb-1.5">Quick Answer</div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            To join a <strong className="text-foreground">{category.name} Telegram group</strong>: browse the {total.toLocaleString()}+ groups below → click any group → click <strong className="text-foreground">Join</strong> → open Telegram → tap <strong className="text-foreground">Join Group</strong>. Free, no sign-in required.
+          </p>
         </div>
         <GroupGrid groups={groups as any} />
         <Pagination page={page} totalPages={totalPages} />

@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { GroupGrid } from '@/components/groups/GroupGrid'
 import { Pagination } from '@/components/browse/Pagination'
 import { buildCategoryMetadata } from '@/lib/seo/metadata'
-import { categoryPageSchema, categoryFAQSchema } from '@/lib/seo/schema-markup'
+import { categoryPageSchema, categoryFAQSchema, categoryHowToSchema, webPageSchema } from '@/lib/seo/schema-markup'
 import type { Metadata } from 'next'
 import { PAGE_SIZE } from '@/lib/constants'
 import Link from 'next/link'
@@ -61,6 +61,7 @@ export default async function DiscordCategoryPage({ params, searchParams }: Cate
   const page = parseInt(searchParams.page || '1')
   const { groups, total, totalPages } = await getCategoryGroups(category.id, page)
 
+  const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
   const schemas = [
     ...categoryPageSchema({
       categoryName: category.name,
@@ -69,6 +70,17 @@ export default async function DiscordCategoryPage({ params, searchParams }: Cate
       categorySlug: params.category,
     }),
     categoryFAQSchema(category.name, 'discord', total),
+    categoryHowToSchema(category.name, 'discord'),
+    webPageSchema({
+      name: `Best ${category.name} Discord Servers`,
+      description: `Find and join the best ${category.name.toLowerCase()} Discord servers. Browse ${total}+ active communities — free invite links, no sign-in.`,
+      url: `${APP_URL}/groupshub/discord-groups/${params.category}`,
+      breadcrumbs: [
+        { name: 'Home', url: APP_URL },
+        { name: 'Discord Servers', url: `${APP_URL}/groupshub/discord-server-links` },
+        { name: category.name, url: `${APP_URL}/groupshub/discord-groups/${params.category}` },
+      ],
+    }),
   ]
 
   return (
@@ -100,6 +112,12 @@ export default async function DiscordCategoryPage({ params, searchParams }: Cate
             <span className="text-muted-foreground">·</span>
             <span className="font-medium" style={{ color: '#5865F2' }}>Discord</span>
           </div>
+        </div>
+        <div className="quick-answer mb-8 rounded-2xl border border-[#5865F2]/20 bg-[#5865F2]/5 p-4 max-w-2xl">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#5865F2] mb-1.5">Quick Answer</div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            To join a <strong className="text-foreground">{category.name} Discord server</strong>: browse the {total.toLocaleString()}+ servers below → click any server → click <strong className="text-foreground">Join</strong> → open Discord → tap <strong className="text-foreground">Accept Invite</strong>. Free, no sign-in required.
+          </p>
         </div>
         <GroupGrid groups={groups as any} />
         <Pagination page={page} totalPages={totalPages} />

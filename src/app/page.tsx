@@ -56,12 +56,12 @@ const tools = [
   {
     id: 'qr-generator',
     name: 'QR Code Generator',
-    description: 'Generate QR codes for URLs, text, contacts, WiFi credentials and more.',
-    href: '#',
+    description: 'Generate QR codes for WhatsApp group links, Telegram groups, Discord servers, and any URL. Free, no watermark.',
+    href: '/qr-code-generator',
     icon: '⬛',
-    available: false,
-    badge: 'Coming Soon',
-    stats: null,
+    available: true,
+    badge: 'Free Tool',
+    stats: 'No sign-in needed',
   },
   {
     id: 'color-palette',

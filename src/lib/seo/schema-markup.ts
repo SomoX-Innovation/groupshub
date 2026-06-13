@@ -404,3 +404,82 @@ export function countryPageSchema(opts: {
     ]),
   ]
 }
+
+export function speakableSchema(cssSelectors: string[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: cssSelectors,
+    },
+    url: APP_URL,
+  }
+}
+
+export function webPageSchema(opts: {
+  name: string
+  description: string
+  url: string
+  dateModified?: string
+  breadcrumbs: Array<{ name: string; url: string }>
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    inLanguage: 'en-US',
+    dateModified: opts.dateModified || new Date().toISOString(),
+    isPartOf: { '@type': 'WebSite', url: APP_URL, name: 'GroupsHub' },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '.quick-answer', 'h2'],
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: opts.breadcrumbs.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.name,
+        item: c.url,
+      })),
+    },
+  }
+}
+
+export function categoryHowToSchema(category: string, platform: string) {
+  const platformLabel = platform.charAt(0).toUpperCase() + platform.slice(1)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Find and Join ${category} ${platformLabel} Groups`,
+    description: `Step-by-step guide to finding the best ${category} ${platformLabel} groups and joining them for free.`,
+    totalTime: 'PT2M',
+    tool: [{ '@type': 'HowToTool', name: `${platformLabel} App` }, { '@type': 'HowToTool', name: 'GroupsHub' }],
+    step: [
+      { '@type': 'HowToStep', position: 1, name: `Browse ${category} groups`, text: `Visit GroupsHub and browse the ${category} section. Groups are ranked by member count and activity.`, url: `${APP_URL}/${platform}-groups/${category.toLowerCase().replace(/\s+/g, '-')}` },
+      { '@type': 'HowToStep', position: 2, name: 'Pick a group', text: `Read the group description, check the member count and language, and pick the ${category} group that fits your interests.` },
+      { '@type': 'HowToStep', position: 3, name: 'Click Join', text: `Click the "Join" button on any group. You will be redirected to ${platformLabel} with the invite link ready. No account on GroupsHub required.` },
+      { '@type': 'HowToStep', position: 4, name: `Join in ${platformLabel}`, text: `Tap "Join Group" in the ${platformLabel} app. It is completely free. You are now a member of the ${category} community.` },
+    ],
+  }
+}
+
+export function countryHowToSchema(countryName: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Find WhatsApp Groups in ${countryName}`,
+    description: `Step-by-step guide to finding and joining WhatsApp, Telegram, and Discord groups from ${countryName} on GroupsHub.`,
+    totalTime: 'PT2M',
+    tool: [{ '@type': 'HowToTool', name: 'WhatsApp' }, { '@type': 'HowToTool', name: 'GroupsHub' }],
+    step: [
+      { '@type': 'HowToStep', position: 1, name: `Go to ${countryName} groups`, text: `Visit the ${countryName} page on GroupsHub. All groups from ${countryName} are listed here, ranked by popularity.`, url: `${APP_URL}/groups/country/${countryName.toLowerCase().replace(/\s+/g, '-')}` },
+      { '@type': 'HowToStep', position: 2, name: 'Filter by platform', text: `Use the platform filter to view only WhatsApp, Telegram, or Discord groups from ${countryName}.` },
+      { '@type': 'HowToStep', position: 3, name: 'Click Join', text: `Click "Join" on any group. You will be redirected to WhatsApp (or Telegram/Discord) with the invite link. Free, no account needed.` },
+      { '@type': 'HowToStep', position: 4, name: 'Join the community', text: `Tap "Join Group" in WhatsApp. You are now a member of this ${countryName} community. Introduce yourself and start connecting.` },
+    ],
+  }
+}
