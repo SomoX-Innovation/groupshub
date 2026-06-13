@@ -25,12 +25,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/browse`,                                           lastModified: now, changeFrequency: 'hourly',  priority: 0.9 },
     { url: `${BASE_URL}/submit`,                                           lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE_URL}/pricing`,                                          lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    // Primary keyword target pages
+    // Primary keyword target pages — platform hubs
     { url: `${BASE_URL}/whatsapp-group-links`,                             lastModified: now, changeFrequency: 'daily',   priority: 0.98 },
+    { url: `${BASE_URL}/telegram-group-links`,                             lastModified: now, changeFrequency: 'daily',   priority: 0.95 },
+    { url: `${BASE_URL}/discord-server-links`,                             lastModified: now, changeFrequency: 'daily',   priority: 0.95 },
     // Trending / how-to content pages
     { url: `${BASE_URL}/world-cup-2026`,                                   lastModified: now, changeFrequency: 'hourly',  priority: 0.92 },
     { url: `${BASE_URL}/how-to-merge-whatsapp-groups`,                     lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/how-to-transfer-whatsapp-to-new-phone`,            lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    // Country + platform long-tail pages
+    { url: `${BASE_URL}/whatsapp-groups-india`,                            lastModified: now, changeFrequency: 'daily',   priority: 0.90 },
+    { url: `${BASE_URL}/whatsapp-groups-pakistan`,                         lastModified: now, changeFrequency: 'daily',   priority: 0.90 },
+    { url: `${BASE_URL}/whatsapp-groups-nigeria`,                          lastModified: now, changeFrequency: 'daily',   priority: 0.90 },
+    { url: `${BASE_URL}/whatsapp-groups-usa`,                              lastModified: now, changeFrequency: 'daily',   priority: 0.90 },
+    { url: `${BASE_URL}/whatsapp-groups-uk`,                               lastModified: now, changeFrequency: 'daily',   priority: 0.90 },
+    { url: `${BASE_URL}/whatsapp-groups-ghana`,                            lastModified: now, changeFrequency: 'daily',   priority: 0.88 },
+    { url: `${BASE_URL}/whatsapp-groups-kenya`,                            lastModified: now, changeFrequency: 'daily',   priority: 0.88 },
+    { url: `${BASE_URL}/whatsapp-groups-philippines`,                      lastModified: now, changeFrequency: 'daily',   priority: 0.88 },
+    { url: `${BASE_URL}/whatsapp-groups-indonesia`,                        lastModified: now, changeFrequency: 'daily',   priority: 0.88 },
+    { url: `${BASE_URL}/whatsapp-groups-south-africa`,                     lastModified: now, changeFrequency: 'daily',   priority: 0.88 },
   ]
 
   // Platform landing pages — canonical SEO targets (dedicated routes, not filter params)
