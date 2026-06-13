@@ -15,20 +15,20 @@ export const revalidate = 600
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
 
 export const metadata: Metadata = {
-  title: 'WhatsApp Group Links, Telegram Groups & Discord Servers 2026 — GroupsHub',
-  description: 'Find and join the best WhatsApp group links, Telegram groups, and Discord servers in 2026. Browse 10,000+ active communities across 195 countries and 50+ categories. Free — no sign-in required.',
+  title: 'WhatsApp Group Links & Telegram Groups — Free Invite Links 2026 | GroupsHub',
+  description: 'Find free WhatsApp group links, Telegram group links, and Discord server invite links in 2026. Browse 10,000+ active communities across 195 countries and 50+ categories. Join instantly — no sign-in required.',
   alternates: { canonical: APP_URL },
   keywords: [
-    'whatsapp group links 2026', 'whatsapp groups to join', 'telegram group links',
-    'discord servers to join', 'join whatsapp group', 'whatsapp group invite link',
-    'telegram groups list', 'discord server list', 'whatsapp group directory',
-    'find whatsapp groups', 'active whatsapp groups', 'best telegram channels 2026',
-    'public discord servers', 'free group links', 'group link directory',
+    'whatsapp group links', 'whatsapp group link', 'whatsapp group links 2026',
+    'whatsapp group invite link', 'whatsapp groups to join', 'join whatsapp group',
+    'free whatsapp group links', 'active whatsapp group links', 'whatsapp group directory',
+    'telegram group links', 'telegram groups', 'discord server invite links',
+    'discord servers to join', 'group invite links', 'find whatsapp groups',
   ],
   openGraph: {
-    title: 'WhatsApp Group Links, Telegram Groups & Discord Servers — GroupsHub',
-    description: 'Join WhatsApp groups, Telegram channels and Discord servers instantly. 10,000+ active communities in 50+ categories and 195 countries. Free, no sign-in.',
-    images: [{ url: `${APP_URL}/api/og`, width: 1200, height: 630, alt: 'GroupsHub — WhatsApp Telegram Discord Group Directory' }],
+    title: 'WhatsApp Group Links & Telegram Groups — Free Invite Links | GroupsHub',
+    description: 'Browse 10,000+ free WhatsApp group links, Telegram group links, and Discord server invite links. 195 countries, 50+ categories. Join instantly — no sign-in.',
+    images: [{ url: `${APP_URL}/api/og`, width: 1200, height: 630, alt: 'GroupsHub — WhatsApp Group Links, Telegram Groups & Discord Servers' }],
   },
 }
 

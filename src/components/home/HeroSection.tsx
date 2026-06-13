@@ -58,19 +58,19 @@ export function HeroSection() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6 animate-slide-up"
             style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
           >
-            Find Your{' '}
+            WhatsApp Group Links,{' '}
             <span className="gradient-text animate-gradient-x bg-gradient-to-r from-blue-500 via-violet-500 to-blue-500">
-              Perfect
+              Telegram
             </span>
             <br className="hidden sm:block" />{' '}
-            Community
+            &amp; Discord Groups
           </h1>
           <p
             className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-slide-up"
             style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
           >
-            Discover and join thousands of WhatsApp, Telegram & Discord groups.
-            Connect with communities that match your interests, worldwide.
+            Find and join free WhatsApp group links, Telegram groups, and Discord servers.
+            10,000+ active communities across 195 countries — no sign-in required.
           </p>
         </div>
 
@@ -88,14 +88,14 @@ export function HeroSection() {
           style={{ animationDelay: '0.35s', animationFillMode: 'both' }}
         >
           <Link
-            href="/groupshub/browse"
+            href="/browse"
             className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass border border-border/50 text-sm font-semibold transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
           >
-            Browse Groups
+            Browse WhatsApp Group Links
             <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link
-            href="/groupshub/submit"
+            href="/submit"
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-violet-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-200"
           >
             <Plus className="h-3.5 w-3.5" />
@@ -111,7 +111,7 @@ export function HeroSection() {
           {platforms.map(({ id, label, border, bg, text }) => (
             <Link
               key={id}
-              href={`/groupshub/browse?platform=${id}`}
+              href={`/browse?platform=${id}`}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full border text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 ${bg} ${border} ${text}`}
             >
               {label}

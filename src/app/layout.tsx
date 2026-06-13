@@ -26,10 +26,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'WhatsApp Group Links, Telegram Groups & Discord Servers — GroupsHub',
+    default: 'WhatsApp Group Links & Telegram Groups — Free Invite Links | GroupsHub',
     template: '%s | GroupsHub',
   },
-  description: 'GroupsHub is the #1 free directory to find and join WhatsApp groups, Telegram groups, and Discord servers. Browse 10,000+ active communities across 195 countries and 50+ categories. No sign-in required.',
+  description: 'GroupsHub is the #1 free directory of WhatsApp group links, Telegram groups, and Discord server invite links. Browse 10,000+ active communities across 195 countries and 50+ categories. No sign-in required.',
   metadataBase: new URL(APP_URL),
   keywords: [
     'whatsapp group links', 'whatsapp groups to join', 'join whatsapp group',

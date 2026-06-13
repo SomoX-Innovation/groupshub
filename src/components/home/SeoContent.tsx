@@ -2,15 +2,17 @@ import Link from 'next/link'
 
 const platforms = [
   {
-    name: 'WhatsApp Groups',
+    name: 'WhatsApp Group Links',
     slug: 'whatsapp',
     color: '#25D366',
     bg: 'bg-[#25D366]/10',
     border: 'border-[#25D366]/20',
     text: 'text-[#25D366]',
-    description: 'WhatsApp groups are private communities of up to 1,024 members that share messages, media, and links in real time.',
-    useCases: ['Stay connected with family & friends', 'Join niche hobby communities', 'Follow local news & events', 'Collaborate on work projects', 'Learn new skills together'],
+    description: 'Browse free WhatsApp group invite links across 50+ categories. Join active WhatsApp groups with a single click — no sign-in required.',
+    useCases: ['Free WhatsApp group invite links', 'Groups for every interest & country', 'Education, Business, Gaming & more', 'Join instantly — no account needed', 'New WhatsApp group links added daily'],
     icon: '💬',
+    dedicatedHref: '/whatsapp-group-links',
+    dedicatedLabel: 'Browse WhatsApp Group Links',
   },
   {
     name: 'Telegram Groups',
@@ -22,6 +24,8 @@ const platforms = [
     description: 'Telegram groups support up to 200,000 members, offer public channels, bots, and rich media sharing with no message limits.',
     useCases: ['Follow crypto & finance channels', 'Access breaking news channels', 'Join gaming communities', 'Tech & developer groups', 'Educational courses & resources'],
     icon: '✈️',
+    dedicatedHref: null,
+    dedicatedLabel: null,
   },
   {
     name: 'Discord Servers',
@@ -33,6 +37,8 @@ const platforms = [
     description: 'Discord servers are organized communities with separate channels, voice chat, roles, and powerful moderation tools.',
     useCases: ['Gaming communities & clans', 'Anime & entertainment fandoms', 'NFT & crypto projects', 'Study & homework help', 'Developer & tech communities'],
     icon: '🎮',
+    dedicatedHref: null,
+    dedicatedLabel: null,
   },
 ]
 
@@ -97,10 +103,10 @@ export function SeoContent() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold mb-3">
-              Find Groups on Every Platform
+              Free WhatsApp Group Links, Telegram Groups &amp; Discord Servers
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              GroupsHub is the only directory covering WhatsApp, Telegram, and Discord — all in one place. Browse by platform to find communities that work best for you.
+              GroupsHub is the only free directory of WhatsApp group links, Telegram group links, and Discord server invite links — all in one place. Browse 10,000+ active communities across 195 countries.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -120,10 +126,10 @@ export function SeoContent() {
                   ))}
                 </ul>
                 <Link
-                  href={`/browse?platform=${p.slug}`}
+                  href={p.dedicatedHref || `/browse?platform=${p.slug}`}
                   className={`inline-flex items-center gap-1.5 text-sm font-semibold ${p.text} hover:underline`}
                 >
-                  Browse {p.name} →
+                  {p.dedicatedLabel || `Browse ${p.name}`} →
                 </Link>
               </div>
             ))}
@@ -135,9 +141,9 @@ export function SeoContent() {
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3">Popular Group Categories</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">WhatsApp Group Links by Category</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              From education and business to gaming and crypto — find active communities in every interest area across all three platforms.
+              Find free WhatsApp group invite links for any interest. Browse Education, Business, Gaming, Crypto, and 50+ more categories — all with free invite links.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
