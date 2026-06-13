@@ -21,10 +21,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Core static routes — highest priority
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE_URL,                   lastModified: now, changeFrequency: 'daily',   priority: 1.0 },
-    { url: `${BASE_URL}/browse`,       lastModified: now, changeFrequency: 'hourly',  priority: 0.9 },
-    { url: `${BASE_URL}/submit`,       lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE_URL}/pricing`,      lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: BASE_URL,                                                       lastModified: now, changeFrequency: 'daily',   priority: 1.0 },
+    { url: `${BASE_URL}/browse`,                                           lastModified: now, changeFrequency: 'hourly',  priority: 0.9 },
+    { url: `${BASE_URL}/submit`,                                           lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE_URL}/pricing`,                                          lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    // Trending / how-to content pages
+    { url: `${BASE_URL}/world-cup-2026`,                                   lastModified: now, changeFrequency: 'hourly',  priority: 0.92 },
+    { url: `${BASE_URL}/how-to-merge-whatsapp-groups`,                     lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/how-to-transfer-whatsapp-to-new-phone`,            lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
   ]
 
   // Platform landing pages — canonical SEO targets (dedicated routes, not filter params)
