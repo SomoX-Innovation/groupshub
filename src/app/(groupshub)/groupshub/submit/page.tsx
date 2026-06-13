@@ -270,32 +270,6 @@ export default function SubmitPage() {
               </Select>
             </div>
 
-            {/* Group Icon URL */}
-            <div className="space-y-1.5">
-              <label className="text-sm font-semibold">
-                Group Icon URL{' '}
-                <span className="text-muted-foreground font-normal">(optional)</span>
-              </label>
-              <div className="flex items-center gap-3">
-                {watch('icon_url') && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={watch('icon_url')}
-                    alt="Group icon preview"
-                    className="w-10 h-10 rounded-xl object-cover flex-shrink-0 border border-border"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
-                  />
-                )}
-                <Input
-                  {...register('icon_url')}
-                  placeholder="https://example.com/group-icon.jpg"
-                  className={`h-11 ${errors.icon_url ? 'border-destructive' : ''}`}
-                />
-              </div>
-              {errors.icon_url && <p className="text-xs text-destructive">{errors.icon_url.message}</p>}
-              <p className="text-xs text-muted-foreground">Paste a direct image URL for your group photo</p>
-            </div>
-
             {/* Description */}
             <div className="space-y-1.5">
               <label className="text-sm font-semibold">

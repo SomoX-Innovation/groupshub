@@ -48,27 +48,9 @@ export function GroupCard({ group, variant = 'default' }: GroupCardProps) {
 
         {/* Header row with icon */}
         <div className="flex items-start gap-3">
-          {/* Group icon — real image or colored initials fallback */}
-          {(group as any).icon_url ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={(group as any).icon_url}
-              alt={group.name}
-              className="w-10 h-10 rounded-xl object-cover flex-shrink-0 shadow-sm border border-border/30"
-              onError={(e) => {
-                const el = e.currentTarget
-                el.style.display = 'none'
-                const fallback = el.nextElementSibling as HTMLElement
-                if (fallback) fallback.style.display = 'flex'
-              }}
-            />
-          ) : null}
           <div
-            className="w-10 h-10 rounded-xl items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm"
-            style={{
-              backgroundColor: color,
-              display: (group as any).icon_url ? 'none' : 'flex',
-            }}
+            className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm"
+            style={{ backgroundColor: color }}
           >
             {initials || '?'}
           </div>

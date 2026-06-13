@@ -1,7 +1,7 @@
 export const INVITE_PATTERNS = {
-  whatsapp: /^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{20,}$/,
-  telegram: /^https:\/\/t\.me\/[A-Za-z0-9_+]{5,}$/,
-  discord: /^https:\/\/(discord\.gg|discord\.com\/invite)\/[A-Za-z0-9]{6,10}$/,
+  whatsapp: /^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9_-]{6,}$/,
+  telegram: /^https:\/\/t\.me\/(\+|joinchat\/)?[A-Za-z0-9_-]{4,}$/,
+  discord: /^https:\/\/(discord\.gg|discord\.com\/invite)\/[A-Za-z0-9_-]{4,}$/,
 }
 
 export function validateInviteLink(platform: string, url: string): boolean {

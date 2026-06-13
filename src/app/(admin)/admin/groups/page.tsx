@@ -33,7 +33,7 @@ export default async function ManageGroupsPage({ searchParams }: Props) {
   else if (status === 'pending') query = query.eq('is_approved', false)
   if (q) query = query.ilike('name', `%${q}%`)
 
-  const { data: groups, count } = await query
+  const { data: groups, count, error } = await query
   const totalPages = Math.ceil((count || 0) / pageSize)
 
   return (
@@ -44,6 +44,11 @@ export default async function ManageGroupsPage({ searchParams }: Props) {
           <span className="ml-2 text-sm font-normal text-muted-foreground">({count || 0} total)</span>
         </h1>
       </div>
+      {error && (
+        <div className="mb-4 rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive font-mono">
+          DB error: {error.message} (code: {error.code})
+        </div>
+      )}
 
       {/* Filters */}
       <form method="GET" className="flex flex-wrap gap-3 mb-6">
