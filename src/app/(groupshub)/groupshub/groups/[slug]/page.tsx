@@ -1,5 +1,4 @@
 ﻿import { notFound } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { JoinButton } from '@/components/groups/JoinButton'
 import { ReportDialog } from '@/components/groups/ReportDialog'
@@ -31,7 +30,7 @@ type GroupFull = {
 }
 
 async function getGroup(slug: string): Promise<GroupFull | null> {
-  const supabase = createClient()
+  const supabase = createAdminClient()
   const { data, error } = await supabase
     .from('groups')
     .select('*, categories(*), countries(*)')
@@ -76,8 +75,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
   adminSupabase.from('groups').update({ views: g.views + 1 }).eq('id', g.id).then(() => {})
 
   // Get related groups
-  const supabase = createClient()
-  const { data: related } = await supabase
+  const { data: related } = await adminSupabase
     .from('groups')
     .select('*, categories(*), countries(*)')
     .eq('is_approved', true)
