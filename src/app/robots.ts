@@ -7,18 +7,18 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: 'Googlebot',
-        allow: '/',
-        disallow: ['/admin/', '/api/'],
+        allow: ['/browse$', '/'],
+        disallow: ['/admin/', '/api/', '/browse?'],
       },
       {
         userAgent: 'Bingbot',
-        allow: '/',
-        disallow: ['/admin/', '/api/'],
+        allow: ['/browse$', '/'],
+        disallow: ['/admin/', '/api/', '/browse?'],
       },
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/admin/', '/api/'],
+        allow: ['/browse$', '/'],
+        disallow: ['/admin/', '/api/', '/browse?'],
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,

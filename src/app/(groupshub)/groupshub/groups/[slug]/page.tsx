@@ -1,4 +1,5 @@
 ﻿import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { JoinButton } from '@/components/groups/JoinButton'
 import { ReportDialog } from '@/components/groups/ReportDialog'
@@ -10,6 +11,7 @@ import { Eye, Users, Calendar } from 'lucide-react'
 import { ShareButton } from '@/components/groups/ShareButton'
 import { buildGroupMetadata } from '@/lib/seo/metadata'
 import { groupSchema } from '@/lib/seo/schema-markup'
+import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import type { Metadata } from 'next'
 
 export const dynamicParams = true
@@ -61,6 +63,8 @@ export async function generateMetadata({ params }: GroupPageProps): Promise<Meta
     country: (group as any).countries?.name,
     description: group.description,
     slug: group.slug,
+    created_at: group.created_at,
+    updated_at: group.updated_at,
   })
 }
 
@@ -101,6 +105,12 @@ export default async function GroupPage({ params }: GroupPageProps) {
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }} />
       ))}
       <div className="container mx-auto px-4 py-10 max-w-4xl">
+        <Breadcrumb crumbs={[
+          { name: 'Home', href: '/' },
+          { name: 'Browse', href: '/browse' },
+          ...(g.categories ? [{ name: g.categories.name, href: `/${g.platform}-groups/${g.categories.slug}` }] : []),
+          { name: g.name },
+        ]} />
         {/* Header */}
         <div className="flex items-start justify-between gap-4 mb-6">
           <div className="flex-1 min-w-0">
@@ -166,6 +176,32 @@ export default async function GroupPage({ params }: GroupPageProps) {
             ))}
           </div>
         )}
+
+        {/* Hub links: category / country / platform */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {g.categories && (
+            <Link
+              href={`/${g.platform}-groups/${g.categories.slug}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-border/60 hover:bg-muted transition-colors"
+            >
+              {g.categories.icon} More {g.categories.name} groups →
+            </Link>
+          )}
+          {g.countries && (
+            <Link
+              href={`/groups/country/${g.countries.code.toLowerCase()}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-border/60 hover:bg-muted transition-colors"
+            >
+              {g.countries.flag_emoji} More groups from {g.countries.name} →
+            </Link>
+          )}
+          <Link
+            href={`/browse?platform=${g.platform}`}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-border/60 hover:bg-muted transition-colors"
+          >
+            Browse all {g.platform.charAt(0).toUpperCase() + g.platform.slice(1)} groups →
+          </Link>
+        </div>
 
         <Separator className="my-8" />
 

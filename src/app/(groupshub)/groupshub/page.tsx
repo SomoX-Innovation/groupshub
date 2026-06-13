@@ -8,7 +8,7 @@ import { CategoriesGrid } from '@/components/home/CategoriesGrid'
 import { SeoContent } from '@/components/home/SeoContent'
 import { GroupGridSkeleton } from '@/components/groups/GroupCardSkeleton'
 import type { Metadata } from 'next'
-import { websiteSchema } from '@/lib/seo/schema-markup'
+import { websiteSchema, howToJoinSchema, directoryDatasetSchema } from '@/lib/seo/schema-markup'
 
 export const revalidate = 600
 
@@ -65,18 +65,34 @@ async function getGroupsByContinent() {
   return data || []
 }
 
+async function getDirectoryStats() {
+  const supabase = createClient()
+  const [{ count: groupCount }, { count: countryCount }] = await Promise.all([
+    supabase.from('groups').select('*', { count: 'exact', head: true }).eq('is_approved', true),
+    supabase.from('countries').select('*', { count: 'exact', head: true }),
+  ])
+  return { groupCount: groupCount || 10000, countryCount: countryCount || 195 }
+}
+
 export default async function HomePage() {
-  const [trending, categories, continentGroups] = await Promise.all([
+  const [trending, categories, continentGroups, stats] = await Promise.all([
     getTrendingGroups(),
     getCategories(),
     getGroupsByContinent(),
+    getDirectoryStats(),
   ])
 
-  const schema = websiteSchema()
+  const allSchemas = [
+    ...websiteSchema(),
+    howToJoinSchema('whatsapp'),
+    howToJoinSchema('telegram'),
+    howToJoinSchema('discord'),
+    directoryDatasetSchema(stats.groupCount, categories.length || 50, stats.countryCount),
+  ]
 
   return (
     <>
-      {schema.map((s, i) => (
+      {allSchemas.map((s, i) => (
         <script
           key={i}
           type="application/ld+json"

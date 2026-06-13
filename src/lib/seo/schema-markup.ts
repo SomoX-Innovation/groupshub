@@ -133,6 +133,7 @@ export function groupSchema(group: {
   member_count?: number
 }) {
   const platformLabel = group.platform.charAt(0).toUpperCase() + group.platform.slice(1)
+  const ogImageUrl = `${APP_URL}/api/og?slug=${group.slug}&platform=${group.platform}${group.category ? `&category=${encodeURIComponent(group.category)}` : ''}${group.country ? `&country=${encodeURIComponent(group.country)}` : ''}`
   return [
     {
       '@context': 'https://schema.org',
@@ -142,6 +143,16 @@ export function groupSchema(group: {
       url: `${APP_URL}/groups/${group.slug}`,
       datePublished: group.created_at,
       dateModified: group.updated_at || group.created_at,
+      image: {
+        '@type': 'ImageObject',
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+      },
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['h1', '.group-description'],
+      },
       publisher: {
         '@type': 'Organization',
         name: 'GroupsHub',
@@ -152,7 +163,7 @@ export function groupSchema(group: {
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: APP_URL },
           { '@type': 'ListItem', position: 2, name: 'Browse Groups', item: `${APP_URL}/browse` },
-          ...(group.category ? [{ '@type': 'ListItem', position: 3, name: group.category, item: `${APP_URL}/browse?category=${group.category.toLowerCase().replace(/\s+/g, '-')}` }] : []),
+          ...(group.category ? [{ '@type': 'ListItem', position: 3, name: group.category, item: `${APP_URL}/${group.platform}-groups/${group.category.toLowerCase().replace(/\s+/g, '-')}` }] : []),
           { '@type': 'ListItem', position: group.category ? 4 : 3, name: group.name, item: `${APP_URL}/groups/${group.slug}` },
         ],
       },
@@ -175,9 +186,152 @@ export function groupSchema(group: {
         ].filter(Boolean).join(', '),
         ...(group.category && { about: { '@type': 'Thing', name: group.category } }),
         ...(group.country && { locationCreated: { '@type': 'Place', name: group.country } }),
+        ...(group.member_count && group.member_count > 0 && {
+          audience: {
+            '@type': 'Audience',
+            audienceType: 'Community Members',
+            numberOfAudience: group.member_count,
+          },
+        }),
       },
     },
   ]
+}
+
+export function howToJoinSchema(platform: string) {
+  const platformLabel = platform.charAt(0).toUpperCase() + platform.slice(1)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Join a ${platformLabel} Group`,
+    description: `Step-by-step guide to finding and joining a ${platformLabel} group using GroupsHub`,
+    totalTime: 'PT2M',
+    tool: [{ '@type': 'HowToTool', name: `${platformLabel} App` }],
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Find a Group',
+        text: `Browse GroupsHub's ${platformLabel} directory. Filter by category or country to narrow down to your interests.`,
+        url: `${APP_URL}/browse`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'View Group Details',
+        text: `Click any group listing to see its name, description, member count, and category.`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Click Join',
+        text: `Click the "Join" button to get the free invite link. No account on GroupsHub is required.`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: `Open in ${platformLabel}`,
+        text: `The link opens directly in the ${platformLabel} app. Tap "Join Group" to complete. It's free.`,
+      },
+    ],
+  }
+}
+
+export function directoryDatasetSchema(groupCount: number, categoryCount: number, countryCount: number) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: 'GroupsHub Group Directory',
+    description: `Comprehensive directory of ${groupCount}+ WhatsApp groups, Telegram groups, and Discord servers across ${categoryCount} categories and ${countryCount} countries.`,
+    url: `${APP_URL}/browse`,
+    creator: { '@type': 'Organization', name: 'GroupsHub', url: APP_URL },
+    dateModified: new Date().toISOString(),
+    license: APP_URL,
+    keywords: ['WhatsApp groups', 'Telegram groups', 'Discord servers', 'group directory', 'invite links'],
+    spatialCoverage: { '@type': 'Place', name: 'Worldwide' },
+    variableMeasured: [
+      { '@type': 'PropertyValue', name: 'Total Groups', value: groupCount },
+      { '@type': 'PropertyValue', name: 'Categories', value: categoryCount },
+      { '@type': 'PropertyValue', name: 'Countries', value: countryCount },
+    ],
+  }
+}
+
+export function categoryFAQSchema(category: string, platform: string, groupCount: number) {
+  const platformLabel = platform.charAt(0).toUpperCase() + platform.slice(1)
+  const year = new Date().getFullYear()
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `How do I join a ${category} ${platformLabel} group?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Browse the ${groupCount}+ ${category} ${platformLabel} groups listed on GroupsHub. Click any group to see its description and member count, then click "Join" to get the free invite link instantly — no account required.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `What are the best ${category} ${platformLabel} groups in ${year}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `GroupsHub lists the top ${category} ${platformLabel} groups ranked by active member count and join activity. The most popular ${category} communities are featured at the top of this page and updated daily.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Are ${category} ${platformLabel} groups free to join?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes. All ${category} ${platformLabel} group invite links on GroupsHub are completely free. No account or sign-in is required on GroupsHub, and joining the group through ${platformLabel} is also free.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `How do I add my ${category} ${platformLabel} group to GroupsHub?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Click "Add Group" in the navigation bar. Fill in your group name, paste the ${platformLabel} invite link, select "${category}" as the category, and submit. No account is required. Groups are typically reviewed and listed within 24 hours.`,
+        },
+      },
+    ],
+  }
+}
+
+export function countryFAQSchema(countryName: string, groupCount: number) {
+  const year = new Date().getFullYear()
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `How do I find WhatsApp groups in ${countryName}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `GroupsHub lists ${groupCount}+ WhatsApp groups, Telegram groups, and Discord servers from ${countryName}. Browse this page to find active local communities and click "Join" to get the free invite link.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Are there Telegram groups from ${countryName} on GroupsHub?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes. GroupsHub has a curated list of Telegram groups and channels from ${countryName} in ${year}. Use the platform filter to view only Telegram communities from ${countryName}.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `How do I add a group from ${countryName} to GroupsHub?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Click "Add Group" in the navigation bar, paste your invite link, and select ${countryName} as the country. Submission is free and no account is required.`,
+        },
+      },
+    ],
+  }
 }
 
 export function itemListSchema(groups: Array<{ name: string; slug: string }>, title: string, description?: string) {

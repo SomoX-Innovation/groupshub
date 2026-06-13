@@ -27,11 +27,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/pricing`,      lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
   ]
 
-  // Platform landing pages — canonical SEO targets
+  // Platform landing pages — canonical SEO targets (dedicated routes, not filter params)
   const platformRoutes: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/browse?platform=whatsapp`, lastModified: now, changeFrequency: 'daily', priority: 0.95 },
-    { url: `${BASE_URL}/browse?platform=telegram`, lastModified: now, changeFrequency: 'daily', priority: 0.95 },
-    { url: `${BASE_URL}/browse?platform=discord`,  lastModified: now, changeFrequency: 'daily', priority: 0.95 },
+    { url: `${BASE_URL}/browse`, lastModified: now, changeFrequency: 'hourly', priority: 0.95 },
   ]
 
   // Individual group pages
@@ -48,19 +46,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/whatsapp-groups/${c.slug}`,  lastModified: now, changeFrequency: 'daily' as const, priority: 0.88 },
     { url: `${BASE_URL}/telegram-groups/${c.slug}`,  lastModified: now, changeFrequency: 'daily' as const, priority: 0.88 },
     { url: `${BASE_URL}/discord-groups/${c.slug}`,   lastModified: now, changeFrequency: 'daily' as const, priority: 0.88 },
-    // Browse filter variants too
-    { url: `${BASE_URL}/browse?platform=whatsapp&category=${c.slug}`, changeFrequency: 'daily' as const, priority: 0.82 },
-    { url: `${BASE_URL}/browse?platform=telegram&category=${c.slug}`, changeFrequency: 'daily' as const, priority: 0.82 },
-    { url: `${BASE_URL}/browse?platform=discord&category=${c.slug}`,  changeFrequency: 'daily' as const, priority: 0.82 },
   ])
 
-  // Country pages
-  const countryRoutes: MetadataRoute.Sitemap = (countries || []).flatMap((c) => [
-    { url: `${BASE_URL}/groups/country/${c.code.toLowerCase()}`,                   lastModified: now, changeFrequency: 'daily' as const, priority: 0.78 },
-    { url: `${BASE_URL}/browse?country=${c.code}`,                                 lastModified: now, changeFrequency: 'daily' as const, priority: 0.72 },
-    { url: `${BASE_URL}/browse?platform=whatsapp&country=${c.code}`,               lastModified: now, changeFrequency: 'daily' as const, priority: 0.72 },
-    { url: `${BASE_URL}/browse?platform=telegram&country=${c.code}`,               lastModified: now, changeFrequency: 'daily' as const, priority: 0.72 },
-  ])
+  // Country pages — canonical dedicated routes only (no filter param variants)
+  const countryRoutes: MetadataRoute.Sitemap = (countries || []).map((c) => ({
+    url: `${BASE_URL}/groups/country/${c.code.toLowerCase()}`,
+    lastModified: now,
+    changeFrequency: 'daily' as const,
+    priority: 0.78,
+  }))
 
   return [...staticRoutes, ...platformRoutes, ...groupRoutes, ...categoryRoutes, ...countryRoutes]
 }

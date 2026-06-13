@@ -4,9 +4,10 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { GroupGrid } from '@/components/groups/GroupGrid'
 import { Pagination } from '@/components/browse/Pagination'
 import { buildCountryMetadata } from '@/lib/seo/metadata'
-import { countryPageSchema } from '@/lib/seo/schema-markup'
+import { countryPageSchema, countryFAQSchema } from '@/lib/seo/schema-markup'
 import type { Metadata } from 'next'
 import { PAGE_SIZE } from '@/lib/constants'
+import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
 export const dynamicParams = true
 export const revalidate = 3600
@@ -62,11 +63,14 @@ export default async function CountryPage({ params, searchParams }: CountryPageP
   const page = parseInt(searchParams.page || '1')
   const { groups, total, totalPages } = await getCountryGroups(params.country, page)
 
-  const schemas = countryPageSchema({
-    countryName: country.name,
-    countryCode: country.code,
-    groups: groups.map((g) => ({ name: g.name, slug: g.slug })),
-  })
+  const schemas = [
+    ...countryPageSchema({
+      countryName: country.name,
+      countryCode: country.code,
+      groups: groups.map((g) => ({ name: g.name, slug: g.slug })),
+    }),
+    countryFAQSchema(country.name, total),
+  ]
 
   return (
     <>
@@ -74,6 +78,11 @@ export default async function CountryPage({ params, searchParams }: CountryPageP
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }} />
       ))}
       <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <Breadcrumb crumbs={[
+          { name: 'Home', href: '/' },
+          { name: 'Browse', href: '/browse' },
+          { name: country.name },
+        ]} />
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-5xl">{country.flag_emoji}</span>
