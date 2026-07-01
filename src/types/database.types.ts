@@ -187,6 +187,48 @@ export interface Database {
         }
         Relationships: []
       }
+      cover_letter_orders: {
+        Row: {
+          id: string
+          user_id: string
+          tier: 'basic' | 'standard' | 'premium'
+          amount_cents: number
+          currency: string
+          dodo_checkout_id: string | null
+          dodo_payment_id: string | null
+          status: 'pending' | 'paid' | 'used' | 'failed'
+          used_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          tier: 'basic' | 'standard' | 'premium'
+          amount_cents: number
+          currency?: string
+          dodo_checkout_id?: string | null
+          dodo_payment_id?: string | null
+          status?: 'pending' | 'paid' | 'used' | 'failed'
+          used_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          tier?: 'basic' | 'standard' | 'premium'
+          amount_cents?: number
+          currency?: string
+          dodo_checkout_id?: string | null
+          dodo_payment_id?: string | null
+          status?: 'pending' | 'paid' | 'used' | 'failed'
+          used_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: Record<string, never>
     Functions: Record<string, never>
