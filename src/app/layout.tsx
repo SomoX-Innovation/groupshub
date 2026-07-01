@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { NavbarSwitcher } from '@/components/layout/NavbarSwitcher'
 import { FooterSwitcher } from '@/components/layout/FooterSwitcher'
 import { Toaster } from '@/components/ui/sonner'
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
