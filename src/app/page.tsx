@@ -64,6 +64,16 @@ const tools = [
     stats: 'No sign-in needed',
   },
   {
+    id: 'cover-letter-generator',
+    name: 'AI Cover Letter Generator',
+    description: 'Generate a tailored, non-generic cover letter from your resume and a job description. Sign in with Google, pick a plan, and get your letter.',
+    href: '/cover-letter-generator',
+    icon: '✉️',
+    available: true,
+    badge: 'Pay Per Letter',
+    stats: 'From $2.99',
+  },
+  {
     id: 'color-palette',
     name: 'Color Palette Tool',
     description: 'Pick colors, generate palettes, and convert between HEX, RGB, HSL and more.',
