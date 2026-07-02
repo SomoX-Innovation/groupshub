@@ -31,7 +31,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
           <div>
             <p className="font-bold text-sm">Admin Panel</p>
-            <p className="text-xs text-muted-foreground">GroupsHub</p>
+            <p className="text-xs text-muted-foreground">AnythingForYou</p>
           </div>
         </div>
         <nav className="p-3 flex-1 space-y-0.5">

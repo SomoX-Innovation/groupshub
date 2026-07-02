@@ -6,7 +6,7 @@ import { NavbarGroupsHub } from './NavbarGroupsHub'
 
 export function NavbarSwitcher() {
   const pathname = usePathname()
-  if (pathname === '/') return <NavbarHome />
   if (pathname.startsWith('/admin')) return null
-  return <NavbarGroupsHub />
+  if (pathname.startsWith('/groupshub')) return <NavbarGroupsHub />
+  return <NavbarHome />
 }

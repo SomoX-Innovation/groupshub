@@ -6,13 +6,14 @@ import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/metadata'
 
 export const revalidate = 86400
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://www.anythingforyou.xyz'
+const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'AnythingForYou'
 const PAGE_URL = `${APP_URL}/cover-letter-generator`
 const YEAR = new Date().getFullYear()
 
 export const metadata: Metadata = buildMetadata({
   title: `AI Cover Letter Generator ${YEAR} — Tailored to Your Resume & Job`,
-  description: `Generate a tailored, non-generic cover letter from your resume and a job description. Plans from $${(COVER_LETTER_PRICING.basic.amountCents / 100).toFixed(2)}. Sign in with Google to get started.`,
+  description: `Generate a tailored, non-generic cover letter from your resume and a job description. Plans from $${(COVER_LETTER_PRICING.basic.amountCents / 100).toFixed(2)}. Sign in to get started.`,
   path: '/cover-letter-generator',
   keywords: [
     'cover letter generator', 'ai cover letter generator', 'cover letter generator',
@@ -30,7 +31,7 @@ const schemaWebPage = {
   url: PAGE_URL,
   description: 'Free AI cover letter generator tailored to your resume and a job description.',
   inLanguage: 'en-US',
-  isPartOf: { '@type': 'WebSite', url: APP_URL, name: 'GroupsHub' },
+  isPartOf: { '@type': 'WebSite', url: APP_URL, name: APP_NAME },
   breadcrumb: {
     '@type': 'BreadcrumbList',
     itemListElement: [
@@ -47,7 +48,7 @@ const schemaWebApplication = {
   '@id': `${PAGE_URL}#app`,
   name: 'AI Cover Letter Generator',
   url: PAGE_URL,
-  description: 'Generates a tailored, professional cover letter from a resume and job description using AI. Sign in with Google, choose a plan, and pay per letter.',
+  description: 'Generates a tailored, professional cover letter from a resume and job description using AI. Sign in, choose a plan, and pay per letter.',
   applicationCategory: 'UtilityApplication',
   operatingSystem: 'All',
   browserRequirements: 'Requires JavaScript',
@@ -67,13 +68,13 @@ const schemaWebApplication = {
   provider: {
     '@type': 'Organization',
     '@id': `${APP_URL}#org`,
-    name: 'GroupsHub',
+    name: APP_NAME,
     url: APP_URL,
   },
 }
 
 const faqs = [
-  { q: 'Do I need an account?', a: 'Yes — sign in with your Google account, then choose a plan to generate a cover letter.' },
+  { q: 'Do I need an account?', a: 'Yes — create a free account with your email, then choose a plan to generate a cover letter.' },
   { q: 'How much does it cost?', a: `Basic ${'$' + (COVER_LETTER_PRICING.basic.amountCents / 100).toFixed(2)}, Standard ${'$' + (COVER_LETTER_PRICING.standard.amountCents / 100).toFixed(2)}, or Premium ${'$' + (COVER_LETTER_PRICING.premium.amountCents / 100).toFixed(2)} — pay once per letter, no subscription.` },
   { q: 'Will the letter sound generic?', a: 'No. It references specific details from your resume and the job description, and avoids stock phrases like "I am excited to apply."' },
   { q: 'Can I edit the result?', a: 'Yes — copy it to your clipboard or download it as a .txt file and edit it anywhere.' },
@@ -94,7 +95,7 @@ export default function CoverLetterGeneratorPage() {
 
         <div className="mb-8 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-widest mb-4">
-            Sign in with Google · Pay per letter
+            Sign in · Pay per letter
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold mb-3">AI Cover Letter Generator {YEAR}</h1>
           <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">

@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
             gap: '8px',
           }}
         >
-          <span style={{ color }}>●</span> GroupsHub
+          <span style={{ color }}>●</span> AnythingForYou
         </div>
       </div>
     ),

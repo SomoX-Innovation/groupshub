@@ -5,7 +5,8 @@ import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/metadata'
 
 export const revalidate = 86400
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://www.anythingforyou.xyz'
+const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'AnythingForYou'
 const PAGE_URL = `${APP_URL}/qr-code-generator`
 const YEAR = new Date().getFullYear()
 
@@ -35,7 +36,7 @@ const schemaWebPage = {
   url: PAGE_URL,
   description: 'Free online QR code generator for URLs, WiFi, text, email, phone, SMS, contacts and WhatsApp. No watermark, no sign-in.',
   inLanguage: 'en-US',
-  isPartOf: { '@type': 'WebSite', url: APP_URL, name: 'GroupsHub' },
+  isPartOf: { '@type': 'WebSite', url: APP_URL, name: APP_NAME },
   breadcrumb: {
     '@type': 'BreadcrumbList',
     itemListElement: [
@@ -86,7 +87,7 @@ const schemaWebApplication = {
   provider: {
     '@type': 'Organization',
     '@id': `${APP_URL}#org`,
-    name: 'GroupsHub',
+    name: APP_NAME,
     url: APP_URL,
   },
   aggregateRating: {
@@ -102,7 +103,7 @@ const schemaOrganization = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': `${APP_URL}#org`,
-  name: 'GroupsHub',
+  name: APP_NAME,
   url: APP_URL,
   logo: { '@type': 'ImageObject', url: `${APP_URL}/logo.png` },
   sameAs: ['https://twitter.com/groupshub'],
@@ -114,7 +115,7 @@ const schemaHowTo = {
   name: 'How to Generate a Free QR Code Online',
   description: 'Create a QR code for any URL, WiFi network, contact, email, phone, SMS or WhatsApp in under 60 seconds.',
   totalTime: 'PT1M',
-  tool: [{ '@type': 'HowToTool', name: 'Free QR Code Generator by GroupsHub' }],
+  tool: [{ '@type': 'HowToTool', name: `Free QR Code Generator by ${APP_NAME}` }],
   supply: [],
   step: [
     { '@type': 'HowToStep', position: 1, name: 'Choose QR code type', text: 'Select from URL, WiFi, Text, Email, Phone, SMS, Contact (vCard), or WhatsApp tabs at the top of the generator.', url: PAGE_URL },
@@ -175,7 +176,7 @@ const schemaItemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'QR Code Types Supported',
-  description: 'All QR code formats supported by the free GroupsHub QR Code Generator',
+  description: `All QR code formats supported by the free ${APP_NAME} QR Code Generator`,
   numberOfItems: 8,
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'URL QR Code', description: 'Generate a QR code for any website or web link.' },

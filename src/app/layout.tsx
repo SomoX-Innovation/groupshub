@@ -10,7 +10,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://www.anythingforyou.xyz'
+const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'AnythingForYou'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -26,10 +27,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'WhatsApp Group Links & Telegram Groups — Free Invite Links | GroupsHub',
-    template: '%s | GroupsHub',
+    default: `${APP_NAME} — Free Online Tools`,
+    template: `%s | ${APP_NAME}`,
   },
-  description: 'GroupsHub is the #1 free directory of WhatsApp group links, Telegram groups, and Discord server invite links. Browse 10,000+ active communities across 195 countries and 50+ categories. No sign-in required.',
+  description: `${APP_NAME} is a growing collection of free online tools — a WhatsApp/Telegram/Discord group directory, an AI cover letter generator, a QR code generator, and more.`,
   metadataBase: new URL(APP_URL),
   keywords: [
     'whatsapp group links', 'whatsapp groups to join', 'join whatsapp group',
@@ -38,21 +39,22 @@ export const metadata: Metadata = {
     'discord server list', 'find whatsapp groups', 'discord community finder',
     'active whatsapp groups', 'best telegram channels', 'public discord servers',
     'free group links', 'group invite links', 'whatsapp community links',
+    'free online tools', 'ai cover letter generator', 'qr code generator',
   ],
   openGraph: {
     type: 'website',
-    siteName: 'GroupsHub',
-    title: 'GroupsHub — Find & Join WhatsApp, Telegram & Discord Groups',
-    description: 'The #1 free directory to find and join WhatsApp groups, Telegram groups, and Discord servers. 10,000+ active communities worldwide.',
-    images: [{ url: `${APP_URL}/api/og`, width: 1200, height: 630, alt: 'GroupsHub - Global Group Directory' }],
+    siteName: APP_NAME,
+    title: `${APP_NAME} — Free Online Tools`,
+    description: `${APP_NAME} is a growing collection of free online tools — group directories, an AI cover letter generator, QR codes, and more.`,
+    images: [{ url: `${APP_URL}/api/og`, width: 1200, height: 630, alt: `${APP_NAME} - Free Online Tools` }],
     locale: 'en_US',
     url: APP_URL,
   },
   twitter: {
     card: 'summary_large_image',
     site: '@groupshub',
-    title: 'GroupsHub — Find & Join WhatsApp, Telegram & Discord Groups',
-    description: 'The #1 free directory to find and join WhatsApp groups, Telegram groups & Discord servers. 10,000+ communities worldwide.',
+    title: `${APP_NAME} — Free Online Tools`,
+    description: `${APP_NAME} is a growing collection of free online tools — group directories, an AI cover letter generator, QR codes, and more.`,
     images: [`${APP_URL}/api/og`],
   },
   robots: {

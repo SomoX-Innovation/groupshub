@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Admin routes use a signed cookie set by /api/admin/login, not Supabase auth
-  if (pathname.startsWith('/admin')) {
+  if (pathname.startsWith('/admin') && pathname !== '/admin-login') {
     const auth = request.cookies.get('admin_session')?.value
     if (auth !== process.env.ADMIN_SESSION_SECRET) {
       const loginUrl = new URL('/admin-login', request.url)
@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Refresh the Supabase session for user-facing routes (required for Google login)
+  // Refresh the Supabase session for user-facing routes (required for email/password login)
   const { supabaseResponse, user } = await updateSession(request)
 
   if (pathname.startsWith('/cover-letter-generator') || pathname.startsWith('/api/generate-cover-letter')) {

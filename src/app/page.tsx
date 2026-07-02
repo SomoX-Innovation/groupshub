@@ -14,6 +14,16 @@ const LiquidEther = dynamic(() => import('@/components/ui/LiquidEther'), {
 
 const tools = [
   {
+    id: 'recipes',
+    name: 'Recipes',
+    description: 'Trending recipes with step-by-step instructions, ingredients, and photos. Easy dinners, viral dishes, and more.',
+    href: '/recipes',
+    icon: '🍳',
+    available: true,
+    badge: 'Free',
+    stats: '10 trending recipes',
+  },
+  {
     id: 'groupshub',
     name: 'GroupsHub — Group Directory',
     description: 'Find and join WhatsApp groups, Telegram groups, and Discord servers. Browse 10,000+ active communities across 195 countries and 50+ categories.',
@@ -66,7 +76,7 @@ const tools = [
   {
     id: 'cover-letter-generator',
     name: 'AI Cover Letter Generator',
-    description: 'Generate a tailored, non-generic cover letter from your resume and a job description. Sign in with Google, pick a plan, and get your letter.',
+    description: 'Generate a tailored, non-generic cover letter from your resume and a job description. Sign in, pick a plan, and get your letter.',
     href: '/cover-letter-generator',
     icon: '✉️',
     available: true,

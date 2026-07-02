@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
-const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'GroupsHub'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://www.anythingforyou.xyz'
+const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'AnythingForYou'
 const YEAR = new Date().getFullYear()
 
 interface BuildMetadataOptions {

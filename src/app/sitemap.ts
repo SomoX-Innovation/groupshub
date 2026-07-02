@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { recipes, getAllCategories } from '@/lib/data/recipes'
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://groupshub.com'
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://www.anythingforyou.xyz'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = createAdminClient()
@@ -31,6 +32,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/discord-server-links`,                             lastModified: now, changeFrequency: 'daily',   priority: 0.95 },
     // Free tools
     { url: `${BASE_URL}/qr-code-generator`,                                lastModified: now, changeFrequency: 'monthly', priority: 0.92 },
+    { url: `${BASE_URL}/cover-letter-generator`,                           lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/recipes`,                                          lastModified: now, changeFrequency: 'weekly',  priority: 0.92 },
     // Trending / how-to content pages
     { url: `${BASE_URL}/world-cup-2026`,                                   lastModified: now, changeFrequency: 'hourly',  priority: 0.92 },
     { url: `${BASE_URL}/how-to-merge-whatsapp-groups`,                     lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
@@ -77,5 +80,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.78,
   }))
 
-  return [...staticRoutes, ...platformRoutes, ...groupRoutes, ...categoryRoutes, ...countryRoutes]
+  // Individual recipe pages
+  const recipeRoutes: MetadataRoute.Sitemap = recipes.map((r) => ({
+    url: `${BASE_URL}/recipes/${r.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }))
+
+  // Recipe category pages
+  const recipeCategoryRoutes: MetadataRoute.Sitemap = getAllCategories().map((c) => ({
+    url: `${BASE_URL}/recipes/category/${c.toLowerCase().replace(/\s+/g, '-')}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  return [
+    ...staticRoutes,
+    ...platformRoutes,
+    ...groupRoutes,
+    ...categoryRoutes,
+    ...countryRoutes,
+    ...recipeRoutes,
+    ...recipeCategoryRoutes,
+  ]
 }

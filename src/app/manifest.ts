@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'GroupsHub — WhatsApp, Telegram & Discord Groups',
-    short_name: 'GroupsHub',
-    description: 'Find and join the best WhatsApp groups, Telegram groups, and Discord servers. Browse 10,000+ communities worldwide.',
+    name: 'AnythingForYou — Free Online Tools',
+    short_name: 'AnythingForYou',
+    description: 'A growing collection of free online tools — a WhatsApp/Telegram/Discord group directory, an AI cover letter generator, a QR code generator, and more.',
     start_url: '/',
     display: 'standalone',
     background_color: '#030712',

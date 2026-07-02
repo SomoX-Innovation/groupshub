@@ -2,7 +2,10 @@ import Link from 'next/link'
 import { Layers } from 'lucide-react'
 
 const tools = [
+  { href: '/recipes', label: 'Recipes', icon: '🍳', soon: false },
   { href: '/groupshub', label: 'GroupsHub', icon: '💬', soon: false },
+  { href: '/qr-code-generator', label: 'QR Code Generator', icon: '⬛', soon: false },
+  { href: '/cover-letter-generator', label: 'Cover Letter Generator', icon: '✉️', soon: false },
   { href: '#', label: 'PDF Tools', icon: '📄', soon: true },
   { href: '#', label: 'Image Editor', icon: '🖼️', soon: true },
   { href: '#', label: 'Link Shortener', icon: '🔗', soon: true },

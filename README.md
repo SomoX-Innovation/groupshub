@@ -14,10 +14,10 @@ Copy `.env.example` to `.env.local` and fill in the values. In addition to the S
 
 ### Cover Letter Generator setup checklist
 
-1. **Supabase Google OAuth**: in the Supabase dashboard → Authentication → Providers, enable Google and add a Google Cloud OAuth Client ID/Secret. Add `https://<your-supabase-project>.supabase.co/auth/v1/callback` as an authorized redirect URI in Google Cloud Console.
+1. **Supabase email/password auth**: enabled by default on new Supabase projects (Authentication → Providers → Email). If email confirmation is turned on, users get a "check your email" link after signing up before they can sign in — you can turn confirmation off in Authentication → Providers → Email → "Confirm email" for faster local testing.
 2. **Run the new migration**: `supabase/migrations/0006_cover_letter_orders.sql` (creates the `cover_letter_orders` table used to track paid, unused letter credits).
 3. **Dodo Payments**: create an account, create three one-time products (Basic/Standard/Premium) matching the prices above, copy their product IDs into the env vars, and register a webhook pointing at `/api/webhooks/dodo` subscribed to `payment.succeeded`, `payment.failed`, and `payment.cancelled`.
-4. Users must sign in with Google (`/login`) before they can access `/cover-letter-generator` — enforced in `middleware.ts`.
+4. Users must sign in (`/login`, email + password) before they can access `/cover-letter-generator` — enforced in `middleware.ts`.
 
 ## Getting Started
 

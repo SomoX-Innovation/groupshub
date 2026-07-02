@@ -48,7 +48,7 @@ function LoginForm() {
               <Shield className="h-7 w-7 text-white" />
             </div>
             <h1 className="text-2xl font-bold">Admin Login</h1>
-            <p className="text-sm text-muted-foreground mt-1">GroupsHub Administration</p>
+            <p className="text-sm text-muted-foreground mt-1">AnythingForYou Administration</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
