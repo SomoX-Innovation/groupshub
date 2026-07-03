@@ -70,6 +70,17 @@ export default function RecipePage({ params }: { params: { slug: string } }) {
         ...(recipe.nutrition.fat && { fatContent: recipe.nutrition.fat }),
       },
     }),
+    ...(recipe.youtubeVideoId && {
+      video: {
+        '@type': 'VideoObject',
+        name: `How to Make ${recipe.title}`,
+        description: recipe.description,
+        thumbnailUrl: recipe.image,
+        contentUrl: `https://www.youtube.com/watch?v=${recipe.youtubeVideoId}`,
+        embedUrl: `https://www.youtube.com/embed/${recipe.youtubeVideoId}`,
+        uploadDate: new Date().toISOString(),
+      },
+    }),
   }
 
   const schemaBreadcrumb = {
@@ -165,6 +176,22 @@ export default function RecipePage({ params }: { params: { slug: string } }) {
             </ol>
           </section>
         </div>
+
+        {recipe.youtubeVideoId && (
+          <section className="mt-10">
+            <h2 className="text-xl font-bold mb-4">Watch How to Make It</h2>
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-muted">
+              <iframe
+                src={`https://www.youtube.com/embed/${recipe.youtubeVideoId}`}
+                title={`How to make ${recipe.title}`}
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          </section>
+        )}
 
         {recipe.tips && recipe.tips.length > 0 && (
           <section className="mt-10">

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
+import { recipes } from '@/lib/data/recipes'
 
 export const metadata: Metadata = {
   title: 'AnythingForYou — Free Online Tools',
@@ -21,7 +22,7 @@ const tools = [
     icon: '🍳',
     available: true,
     badge: 'Free',
-    stats: '10 trending recipes',
+    stats: `${recipes.length} trending recipes`,
   },
   {
     id: 'groupshub',

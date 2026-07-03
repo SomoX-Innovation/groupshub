@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Clock, ChefHat } from 'lucide-react'
+import { Clock, ChefHat, Play } from 'lucide-react'
 import type { Recipe } from '@/lib/data/recipes'
 
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
@@ -20,6 +20,11 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
         <span className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-background/90 backdrop-blur-sm text-foreground">
           {recipe.category}
         </span>
+        {recipe.youtubeVideoId && (
+          <span className="absolute top-3 right-3 w-7 h-7 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center">
+            <Play className="h-3.5 w-3.5 text-primary fill-primary" />
+          </span>
+        )}
       </div>
       <div className="p-5 flex flex-col flex-1">
         <h2 className="font-bold text-lg leading-snug mb-1.5 group-hover:text-primary transition-colors">
