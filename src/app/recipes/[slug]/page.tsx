@@ -182,7 +182,7 @@ export default function RecipePage({ params }: { params: { slug: string } }) {
             <h2 className="text-xl font-bold mb-4">Watch How to Make It</h2>
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-muted">
               <iframe
-                src={`https://www.youtube.com/embed/${recipe.youtubeVideoId}`}
+                src={`https://www.youtube.com/embed/${recipe.youtubeVideoId}?rel=0&modestbranding=1&playsinline=1`}
                 title={`How to make ${recipe.title}`}
                 className="absolute inset-0 w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
